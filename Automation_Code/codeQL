@@ -116,19 +116,21 @@ run_query(){
         codeql database create --language="$language" --source-root="/home/codeQL/target-code/$directory_name/$clone_directory_name" codeql-db-"$directory_name"
 
         # run query
-        for ql_file in $(find_ql_files "/home/codeQL/codeql-repo/$language/ql/src/Security"); do
-                echo -e "\033[32m[RUN] codeQL query\033[0m $@"
-                codeql database analyze codeql-db-"$directory_name" "$ql_file" --format=csv --output=/home/codeQL/target-code/$directory_name/${ql_file%.ql}.csv
-        
-                # delete csv file size 0
-                csv_file="${ql_file%.ql}.csv"
-                if [ ! -s "$csv_file" ]; then
-                        echo "$csv_file Delete csv"
-                        rm "$csv_file"
-                fi
-        done
+        #for ql_file in $(find_ql_files "/home/codeQL/codeql-repo/$language/ql/src/Security/CWE-807"); do
+         #       echo -e "\033[32m[RUN] codeQL query\033[0m $@"
+          #      codeql database analyze codeql-db-"$directory_name" "$ql_file" --format=csv --output="/home/codeQL/target-code/$directory_name/${ql_file%.ql}.csv"
 
-        #codeql database analyze codeql-db-"$directory_name" /home/codeQL/codeql-repo/"$language"/ql/src/Security/CWE-079/ReflectedXss.ql --format=csv --output=/home/codeQL/target-code/$directory_name/reflectedxss.csv
+                # delete csv file size 0
+               # csv_file="${ql_file%.ql}.csv"
+               #if [ ! -s "$csv_file" ]; then
+               #         echo "$csv_file Delete csv"
+               #         rm "$csv_file"
+               #fi
+        #done
+
+        #codeql database analyze codeql-db-"$directory_name" /home/codeQL/codeql-repo/"$language"/ql/src/Security/CWE-079/ReflectedXss.ql --format=csv --output="/home/codeQL/target-code/"$directory_name"/reflectedxss.csv"
+        # 이 코드로 돌아가요 -나중에 "CWE-807"부분을 프론트에서 체크되면 백으로 넘겨받고 진행 -> 한 CWE-(num)파일에 잇는 .ql문이 다 돌아서 --output의 경로에 생성됨.
+        codeql database analyze codeql-db-"$directory_name" /home/codeQL/codeql-repo/"$language"/ql/src/Security/CWE-807 --format=sarif-latest --output="/home/codeQL/target-code/"$directory_name".sarif" --download
 }
 
 echo " ------------------------------  "
