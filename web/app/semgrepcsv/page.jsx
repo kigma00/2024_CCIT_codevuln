@@ -39,7 +39,7 @@ const Semgrepcsv = () => {
   return (
     <div>
       <div className="my-10 mx-44 flex justify-between">
-        <h1 className="text-3xl font-bold">Vulnerability List</h1>
+        <h1 className="text-4xl font-bold">Vulnerability List</h1>
         <button
           onClick={handleDownload}
           className="px-4 py-2 bg-blue-500 text-white rounded"
@@ -49,7 +49,7 @@ const Semgrepcsv = () => {
       </div>
       <div className="mx-44 flex justify-between">
         <table className="table-auto">
-          <thead>
+          <thead className="justify-self-start text-justify">
             <tr>
               <th>Check_id</th>
               <th>Path</th>
@@ -59,13 +59,21 @@ const Semgrepcsv = () => {
           </thead>
           <tbody>
             {data.map((row, index) => (
-              <tr className=" border-b-2 border-neutral-300" key={index}>
+              <tr
+                className=" border-b-2 border-neutral-300 text-sm"
+                key={index}
+              >
                 <td className="items-center pr-5">{row.check_id}</td>
-                <td className="items-center px-5">{row.path}</td>
-                <td className="justify-center items-center text-lg font-bold px-5">
+                <td className="items-center pr-5">{row.path}</td>
+                <td className="justify-center items-center font-bold pr-5">
                   {row.start_line}~{row.end_line}
                 </td>
-                <td className="items-center pl-5">{row.message}</td>
+                <td className="items-center pl-5">
+                  <details>
+                    <summary>펼쳐보기</summary>
+                    {row.message}
+                  </details>
+                </td>
               </tr>
             ))}
           </tbody>
