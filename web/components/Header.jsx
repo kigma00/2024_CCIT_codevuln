@@ -10,8 +10,7 @@ const Header = () => {
             className="text-2xl md:text-3xl font-bold flex flex-row items-center"
             href="/"
           >
-            <img src="/codevuln.png" class="h-8 md:h-10 mr-1" />
-            CodeVuln
+            <img src="/codevuln.png" className="h-8 md:h-10 mr-1" />
           </a>
           <div className="space-x-4 text-gray-500 font-normal md:text-lg text:md">
             <Link

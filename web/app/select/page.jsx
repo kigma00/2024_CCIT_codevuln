@@ -3,21 +3,21 @@
 import { useState } from "react"
 import Link from "next/link"
 
-const getRepoInfo = async (repoName) => {
-  try {
-    const response = await fetch(
-      `https://api.github.com/search/repositories?q=${repoName}`
-    )
-    if (!response.ok) {
-      throw new Error("검색 결과를 가져올 수 없습니다.")
-    }
-    const data = await response.json()
-    return data.items
-  } catch (error) {
-    console.error("API 호출 중 오류 발생:", error)
-    return null
-  }
-}
+// const getRepoInfo = async (repoName) => {
+//   try {
+//     const response = await fetch(
+//       `https://api.github.com/search/repositories?q=${repoName}`
+//     )
+//     if (!response.ok) {
+//       throw new Error("검색 결과를 가져올 수 없습니다.")
+//     }
+//     const data = await response.json()
+//     return data.items
+//   } catch (error) {
+//     console.error("API 호출 중 오류 발생:", error)
+//     return null
+//   }
+// }
 
 const CourseSearch = ({ getSearchResults }) => {
   const [query, setQuery] = useState("")
@@ -25,23 +25,23 @@ const CourseSearch = ({ getSearchResults }) => {
   const [selectedRepo, setSelectedRepo] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const repoInfo = await getRepoInfo(query)
-      if (repoInfo && repoInfo.length > 0) {
-        setRepos(repoInfo)
-        setErrorMessage(null)
-      } else {
-        throw new Error("검색 결과가 없습니다.")
-      }
-    } catch (error) {
-      console.error("레포지토리 검색 중 오류 발생:", error)
-      setRepos([])
-      setSelectedRepo(null)
-      setErrorMessage(error.message)
-    }
-  }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const repoInfo = await getRepoInfo(query)
+  //     if (repoInfo && repoInfo.length > 0) {
+  //       setRepos(repoInfo)
+  //       setErrorMessage(null)
+  //     } else {
+  //       throw new Error("검색 결과가 없습니다.")
+  //     }
+  //   } catch (error) {
+  //     console.error("레포지토리 검색 중 오류 발생:", error)
+  //     setRepos([])
+  //     setSelectedRepo(null)
+  //     setErrorMessage(error.message)
+  //   }
+  // }
 
   return (
     <>
@@ -93,7 +93,7 @@ const CourseSearch = ({ getSearchResults }) => {
             <div className="flex flex-row w-full justify-end">
               <div className="bg-emerald-200 w-full rounded-b-3xl"></div>
               <div className="p-3">
-                <Link href="/next-page">
+                <Link href="/semgrepcsv">
                   <div className="bg-black w-14 h-14 rounded-full hover:bg-neutral-900 flex justify-center items-center">
                     <img src="/arrow.png" className="h-10 bg-transparent"></img>
                   </div>

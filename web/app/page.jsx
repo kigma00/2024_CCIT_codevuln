@@ -49,24 +49,46 @@ const CourseSearch = ({ getSearchResults }) => {
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex md:justify-center flex-row items-center"
-      >
-        <input
-          type="text"
-          placeholder="Search Repository Name"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="bg-white py-2 md:py-3 pl-10 md:pr-80 pr-40 m-2 rounded-full border-2 border-blue-500 focus:border-blue-500 focus:outline-none  focus:ring-blue-500"
-        />
-        <button
-          type="submit"
-          className="p-2 m-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full"
+      <div id="logo-area" className="flex justify-center mt-14 mb-2">
+        <div className="flex items-center">
+          <img src="/codevuln.png" className="w-20" />
+          <h1 className="text-5xl font-bold">CodeVuln</h1>
+        </div>
+      </div>
+      <div className="flex flex-col items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex md:justify-center flex-row items-center"
         >
-          <img src="/searchicon.png" className="w-6 md:w-10 p-1" />
-        </button>
-      </form>
+          <input
+            type="text"
+            placeholder="Search Repository Name"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="bg-white py-2 md:py-3 pl-10 md:pr-80 pr-40 m-2 mt-5 rounded-full border-2 border-blue-500 focus:border-blue-500 focus:outline-none  focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="p-2 m-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full"
+          >
+            <img src="/searchicon.png" className="w-6 md:w-10 p-1" />
+          </button>
+        </form>
+        {repos.length === 0 && (
+          <div className="flex justify-center">
+            <p
+              id="explain"
+              className="font-medium text-md text-gray-500 text-center items-center w-7/12 mt-8"
+            >
+              CodeVuln helps you safely manage code written by developers and
+              provides a batch of analysis results with Semgrep, CodeQL, and
+              SonarQube. In addition, the user can check additional paths and
+              columns.
+            </p>
+          </div>
+        )}
+      </div>
+
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       {repos.length > 0 && (
         <div>
@@ -104,7 +126,7 @@ const CourseSearch = ({ getSearchResults }) => {
                     <br></br>
                     <div className="flex justify-end items-center">
                       <Link href="/select">
-                        <img src="/nexticon.png" className="w-10" />
+                        <img src="/nexticon.png" className="w-8 md:w-10" />
                       </Link>
                     </div>
                   </div>
