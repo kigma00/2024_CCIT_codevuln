@@ -38,34 +38,34 @@ const Semgrepcsv = () => {
 
   return (
     <div>
-      <h1 className="my-10 mx-32 text-3xl font-bold">Vulnerability List</h1>
-      <div className="mx-32 flex justify-between">
-        <table>
+      <div className="my-10 mx-44 flex justify-between">
+        <h1 className="text-3xl font-bold">Vulnerability List</h1>
+        <button
+          onClick={handleDownload}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Export
+        </button>
+      </div>
+      <div className="mx-44 flex justify-between">
+        <table className="table-auto">
           <thead>
             <tr>
-              <th className="px-10 items-start">Check_id</th>
-              <th className="px-10 items-start">Path</th>
-              <th className="px-10 items-start">Line</th>
-              <th className="px-10 items-start">Message</th>
-              <th>
-                <button
-                  onClick={handleDownload}
-                  className="px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                  Export
-                </button>
-              </th>
+              <th>Check_id</th>
+              <th>Path</th>
+              <th>Line</th>
+              <th>Message</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row, index) => (
-              <tr className=" border-b-2 border-neutral-600" key={index}>
-                <td>{row.check_id}</td>
-                <td>{row.path}</td>
-                <td className="justify-center items-center">
+              <tr className=" border-b-2 border-neutral-300" key={index}>
+                <td className="items-center pr-5">{row.check_id}</td>
+                <td className="items-center px-5">{row.path}</td>
+                <td className="justify-center items-center text-lg font-bold px-5">
                   {row.start_line}~{row.end_line}
                 </td>
-                <td>{row.message}</td>
+                <td className="items-center pl-5">{row.message}</td>
               </tr>
             ))}
           </tbody>
