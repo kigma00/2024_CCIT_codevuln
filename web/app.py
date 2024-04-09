@@ -17,6 +17,14 @@ def index():
 def result():
   return render_template('result.html')
 
+@app.route('/dashboard')
+def dashboard():
+  return render_template('dashboard.html')
+
+@app.route('/setting')
+def setting():
+  return render_template('setting.html')
+
 #아래와 같이 html 렌더링이 아닌 특정 값을 리턴할 수도 있다.
 @app.route('/hello')
 def hello():
