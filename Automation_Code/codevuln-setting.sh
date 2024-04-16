@@ -17,7 +17,6 @@ banner() {
 codevuln_setting() {
     clear
     echo -e "\033[32m[+] codevuln Setting\033[0m $@"
-    sleep 2
     apt-get update
     apt-get install git -y
     apt-get install wget -y
@@ -38,7 +37,6 @@ codevuln_setting() {
     apt install git -y
     git clone https://github.com/github/codeql /home/codevuln/codeql/codeql-repo
     echo -e "\033[32m[+] codeql repo download complete\033[0m $@"
-    sleep 2
 
     wget https://github.com/github/codeql-cli-binaries/releases/download/v2.16.3/codeql-linux64.zip
     unzip codeql-linux64.zip
@@ -50,7 +48,6 @@ codevuln_setting() {
     source ~/.bashrc
     source ./.bashrc
     echo -e "\033[32m[+] codeQL Install & Setting complete\033[0m $@"
-    sleep 2
 
     echo -e "\033[32m[+] Semgrep Install & Setting\033[0m $@"
     cd /home/codevuln/semgrep/
@@ -80,9 +77,7 @@ EOF
     echo "$python_code" > /home/codevuln/semgrep/json_csv.py
     chmod +x /home/codevuln/semgrep/json_csv.py
     echo -e "\033[32m[README] Please copy the URL and login from the browser\033[0m $@"
-    sleep 3
     semgrep login
-    sleep 3
 }
 
 clear
