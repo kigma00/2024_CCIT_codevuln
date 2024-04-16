@@ -12,23 +12,19 @@ echo "    \\|_______|\\|_______|\\|_______|\\|_______|\\|__|/       \\|_______|\
 echo""                                                                                                                                                                                                                                                             
 
 # query setting
-echo ""
-echo -e "\033[32m[+] Directory Setting\033[0m $@"
-read -p "Enter top-level directory to create (project name) : " directory_name
-echo -e "\033[32m[+] Make Directory : /home/codevuln/target-repo/$directory_name\033[0m $@"
-sleep 3
-mkdir "/home/codevuln/target-repo/$directory_name"
-mkdir "/home/codevuln/target-repo/$directory_name/codeql"
-mkdir "/home/codevuln/target-repo/$directory_name/semgrep"
-mkdir "/home/codevuln/target-repo/$directory_name/sonarqube"
-
 echo -e "\033[32m[+] Git clone\033[0m $@"
 read -p "Enter git clone address : " repository_url
 clone_directory_name="$directory_name"-repo
 mkdir -p /home/codevuln/target-repo/$directory_name/$clone_directory_name   
 echo -e "\033[32m[+] git clone : /home/codevuln/target-repo/$directory_name/$clone_directory_name\033[0m $@"
-sleep 3
 git clone --depth=1 "$repository_url" "/home/codevuln/target-repo/$directory_name/$clone_directory_name"
+
+directory_name=$(basename "$repository_url")
+
+mkdir "/home/codevuln/target-repo/$directory_name"
+mkdir "/home/codevuln/target-repo/$directory_name/codeql"
+mkdir "/home/codevuln/target-repo/$directory_name/semgrep"
+mkdir "/home/codevuln/target-repo/$directory_name/sonarqube"
 
 clear
 echo -e "\033[32m[+] codeQL\033[0m $@"
@@ -60,5 +56,4 @@ case $choice in
         ;;
 esac
 
-(./codeql.sh $directory_name $clone_directory_name $language &)
-(./semgrep.sh $directory_name $clone_directory_name &)
+./scripts/codeql.sh $directory_name $clone_directory_name $language & ./scripts/semgrep.sh $directory_name $clone_directory_name &
