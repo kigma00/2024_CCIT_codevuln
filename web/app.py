@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, g
+import sqlite3
+
 #블루프린트 임포트
 from input_tag_analysis import input_tag_bp
 

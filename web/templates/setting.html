@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodeVuln</title>
+    <title>CodeVuln - Setting</title>
     <link
       rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.ico') }}"
@@ -17,7 +17,7 @@
     >
       <a href="/" class="flex flex-row items-center mx-8">
         <img src="static/codevuln.png" class="w-8" />
-        <p class="font-bold text-3xl">CodeVuln</p>
+        <p class="font-bold text-3xl">Setting</p>
       </a>
       <div class="flex flex-row items-center mx-8 space-x-8">
         <a
@@ -36,6 +36,66 @@
         >
       </div>
     </header>
-    <div class="text-5xl font-bold">CodeVuln Setting!</div>
+
+    <div class="flex flex-row mt-10 justify-between">
+      <div class="flex flex-col ml-20">
+        <h1 class="text-3xl font-bold hover:cursor-pointer">
+          API Token<a
+            class="ml-2 hover:cursor-pointer text-gray-400"
+            title="Enter the tokens that you need to operate the api."
+            >❔</a
+          >
+        </h1>
+        <form method="post" action="" class="flex flex-col">
+          <label for="gitub_token" class="mt-5 font-bold ml-4 mb-1"
+            >Github API<a
+              class="ml-2 hover:cursor-pointer text-gray-400"
+              title="Required when analyzing private repositories."
+              >(❔)</a
+            >
+          </label>
+          <input
+            class="font-medium border-2 border-blue-600 h-10 rounded-full outline-0 bg-white px-5 w-96"
+            type="text"
+            id="gitub_token"
+            name="gitub_token"
+            placeholder="Enter Gitub api token here."
+            required
+          />
+          <label for="CodeQL_token" class="mt-5 font-bold ml-4"
+            ><a class="text-orange-500 mt-2">*</a>CodeQL API</label
+          >
+          <input
+            class="font-medium border-2 border-blue-600 h-10 rounded-full outline-0 bg-white px-5 w-96"
+            type="text"
+            id="CodeQL_token"
+            name="CodeQL_token"
+            placeholder="Enter CodeQL api token here."
+            required
+          />
+          <label for="Semgrep_token" class="mt-5 font-bold"
+            ><a class="text-orange-500 mt-2 ml-4">*</a>Semgrep API</label
+          >
+          <input
+            class="font-medium border-2 border-blue-600 h-10 rounded-full outline-0 bg-white px-5 w-96"
+            type="text"
+            id="Semgrep_token"
+            name="Semgrep_token"
+            placeholder="Enter Semgrep api token here."
+            required
+          />
+          <div class="flex flex-row items-center mt-4">
+            <button
+              type="submit"
+              class="w-40 bg-blue-600 hover:bg-blue-800 font-bold text-gray-100 px-4 py-2 rounded-full hover:shadow hover:shadow-black"
+            >
+              submit
+            </button>
+            <a class="text-orange-500 mt-2 ml-4">* </a> is required
+          </div>
+        </form>
+      </div>
+      <div name="div_holder" class=""></div>
+    </div>
   </body>
 </html>
