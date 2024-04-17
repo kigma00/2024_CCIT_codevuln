@@ -44,7 +44,6 @@ codevuln_setting() {
     rm -rf /home/codevuln/codeql/codeql-linux64.zip
     cd ~
     echo 'export PATH=$PATH:/home/codevuln/codeql/codeql-cli/' >> ~/.bashrc
-    echo 'export SEMGREP_APP_TOKEN="0814691bdb1deaf325766b1e553a31626e75b234c6f3ddfc55612b16b46621d0"' >> ~/.bashrc
     source ~/.bashrc
     source ./.bashrc
     echo -e "\033[32m[+] codeQL Install & Setting complete\033[0m $@"
