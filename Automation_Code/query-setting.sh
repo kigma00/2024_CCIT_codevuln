@@ -57,4 +57,4 @@ case $choice in
         ;;
 esac
 
-./scripts/codeql.sh $directory_name $clone_directory_name $language & ./scripts/semgrep.sh $directory_name $clone_directory_name &
+./codeql.sh $directory_name $clone_directory_name $language & ./semgrep.sh $directory_name $clone_directory_name &
