@@ -77,6 +77,7 @@ EOF
     echo "$python_code" > /home/codevuln/semgrep/json_csv.py
     chmod +x /home/codevuln/semgrep/json_csv.py
     echo -e "\033[32m[README] Please copy the URL and login from the browser\033[0m $@"
+    source ~/.bashrc
     semgrep login
 }
 
