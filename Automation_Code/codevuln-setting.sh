@@ -44,6 +44,7 @@ codevuln_setting() {
     rm -rf /home/codevuln/codeql/codeql-linux64.zip
     cd ~
     echo 'export PATH=$PATH:/home/codevuln/codeql/codeql-cli/' >> ~/.bashrc
+    cd ~
     source ~/.bashrc
     source ./.bashrc
     echo -e "\033[32m[+] codeQL Install & Setting complete\033[0m $@"
