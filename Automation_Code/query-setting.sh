@@ -20,8 +20,6 @@ mkdir -p /home/codevuln/target-repo/$directory_name/$clone_directory_name
 echo -e "\033[32m[+] git clone : /home/codevuln/target-repo/$directory_name/$clone_directory_name\033[0m $@"
 git clone --depth=1 "$repository_url" "/home/codevuln/target-repo/$directory_name/$clone_directory_name"
 
-
-
 mkdir "/home/codevuln/target-repo/$directory_name"
 mkdir "/home/codevuln/target-repo/$directory_name/codeql"
 mkdir "/home/codevuln/target-repo/$directory_name/semgrep"
