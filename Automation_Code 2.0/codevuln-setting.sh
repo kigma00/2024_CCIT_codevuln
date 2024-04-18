@@ -105,7 +105,7 @@ EOF
         sudo unzip sonarqube-10.4.1.88267.zip
         sudo mv /home/codevuln/sonarqube/sonarqube-10.4.1.88267 /home/codevuln/sonarqube/sonarqube
         sudo chmod 777 /home/codevuln/sonarqube/sonarqube
-        sudo rm -r sonarqube-10.4.1.88267
+        sudo rm -r sonarqube-10.4.1.88267.zip
 
         # 'sonar' 사용자 추가 및 권한 설정
         sudo adduser --system --no-create-home --group sonar
