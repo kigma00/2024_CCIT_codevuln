@@ -52,10 +52,11 @@ csv_file_path=f"/home/codevuln/target-repo/{directory_name}/sonarqube/sonarqube.
 with open(csv_file_path, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     # CSV 헤더 작성
-    writer.writerow(['Severity', 'Rule', 'Component', 'Start Line', 'End Line', 'Start Column', 'End Column', 'Message'])
+    writer.writerow(['Project Name', 'Severity', 'Rule', 'Component', 'Start Line', 'End Line', 'Start Column', 'End Column', 'Message'])
 
     # 정렬된 이슈들을 순회하며 CSV 파일에 기록
     for issue in issues:
+        project_name = directory_name('project_name', '')
         rule = issue.get('rule', '')
         component = issue.get('component', '')
         line_info = issue.get('textRange', {})
@@ -65,5 +66,5 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as file:
         endColumn = line_info.get('endOffset', '')
         message = issue.get('message', '')
         severity = issue.get('severity', '')
-        writer.writerow([directory_name, severity, rule, component, startLine, endLine, startColumn, endColumn, message])
+        writer.writerow([project_name, severity, rule, component, startLine, endLine, startColumn, endColumn, message])
 END
