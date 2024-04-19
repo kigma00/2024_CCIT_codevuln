@@ -6,6 +6,7 @@ language=$3
 
 echo -e "\033[32m[+] create database\033[0m $@"
 sleep 2
+source ~/.bashrc
 codeql database create --language="$language" --source-root="/home/codevuln/target-repo/$directory_name/$clone_directory_name" "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name"
 
 cwe_directories=$(find /home/codevuln/codeql/codeql-repo/$language/ql/src/Security/ -type d -name "CWE*")
@@ -15,6 +16,7 @@ for dir in $cwe_directories; do
     for ql_file in $ql_files; do
         echo "Analyzing $ql_file..."
         output_file="/home/codevuln/target-repo/$directory_name/codeql/$(basename ${ql_file%.ql}).csv"
+        source ~/.bashrc
         codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$ql_file" --format=csv --output="$output_file"
         echo "Output saved to $output_file"
     done
