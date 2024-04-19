@@ -134,5 +134,6 @@ EOF
 }
 
 clear
+sleep 2
 banner
 codevuln_setting
