@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#24.04.20 kgh add code [codeql error]
+source ~/.bashrc
+
 directory_name=$1
 clone_directory_name=$2
 language=$3
