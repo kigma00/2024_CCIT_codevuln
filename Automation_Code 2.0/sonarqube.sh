@@ -13,6 +13,10 @@ token=$(tail -n 1 token.txt)
   -Dsonar.host.url="http://localhost:9000" \
   -Dsonar.login="$token"
 
+# 분석 결과가 동기화될 때까지 기다림 (예: 60초)
+echo "Waiting for SonarQube to process the results..."
+sleep 10
+
 # python 코드 내에서 사용할 환경 변수 선언
 export directory_name
 
@@ -56,7 +60,7 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as file:
 
     # 정렬된 이슈들을 순회하며 CSV 파일에 기록
     for issue in issues:
-        project_name = directory_name('project_name', '')
+        project_name = directory_name
         rule = issue.get('rule', '')
         component = issue.get('component', '')
         line_info = issue.get('textRange', {})
