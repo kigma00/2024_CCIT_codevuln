@@ -20,7 +20,7 @@ codevuln_setting() {
     apt-get install sudo
 
     # 필요한 패키지 및 라이브러리 설치 확인 및 설치
-    packages=("openjdk-17-jre-headless" "python3-pip" "wget" "unzip" "curl" "git" "vim")
+    packages=("openjdk-17-jre-headless" "python3-pip" "wget" "unzip" "curl" "git" "vim" "jq")
     for package in "${packages[@]}"; do
         if ! dpkg -l | grep -q $package; then
             sudo apt install -y $package
