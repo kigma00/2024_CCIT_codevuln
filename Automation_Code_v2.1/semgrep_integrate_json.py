@@ -13,8 +13,8 @@ for i, filename in enumerate(os.listdir(directory), start=1):
     if filename.endswith('.json'):
         file_path = os.path.join(directory, filename)
         with open(file_path, 'r') as f:
-            data = json.load(f)
-            data[f"{filename}"] = data
+            file_data = json.load(f)  
+            data[filename] = file_data  
 
 with open(os.path.join(directory, output_filename), 'w') as f:
     json.dump(data, f, indent=4)
