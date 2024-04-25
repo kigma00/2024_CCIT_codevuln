@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Running</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .loading-message {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-message">Running Query...</div>
+    <div class="loading-spinner"></div>
+	
+    <script>
+    function checkScanStatus() {
+        fetch('/check_process')
+            .then(function(response) {
+                if (response.status === 204) {
+                    // 작업이 완료되지 않았으므로 아무 작업도 수행하지 않습니다.
+                    return;
+                }
+                return response.json();
+            })
+            .then(function(data) {
+                if (data && data.status === "complete" && data.redirect) {
+                    // 서버에서 리다이렉션할 URL을 받았으므로 해당 URL로 이동합니다.
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(function(error) {
+                console.log('Error checking scan status:', error);
+            });
+    }
+    window.onload = function() {
+        setInterval(checkScanStatus, 5000);
+    };
+</script>
+
+
+
+	
+</body>
+</html>

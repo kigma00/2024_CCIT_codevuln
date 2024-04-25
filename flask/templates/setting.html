@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="setting-container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/">GO Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <form action="#" method="POST" class="form-setting">
+                <!-- Project Name Field -->
+                <label for="project_name">Project Name:</label>
+                <input type="text" id="project_name" name="project_name" placeholder="Enter Project Name" required>
+
+                <!-- Semgrep Token Field -->
+                <label for="setting_input1">Semgrep Token:</label>
+                <input type="text" id="setting_input1" name="setting_input1" placeholder="Enter Semgrep Token" required>
+                
+                <!-- SonarQube Token Field -->
+                <label for="setting_input2">SonarQube Token:</label>
+                <input type="text" id="setting_input2" name="setting_input2" placeholder="Enter SonarQube Token" required>
+                
+                <!-- YAML Save Field -->
+                <label for="setting_input3">YAML Save:</label>
+                <input type="text" id="setting_input3" name="setting_input3" placeholder="Enter YAML Path" required>
+                
+                <!-- Submit Button -->
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

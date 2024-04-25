@@ -1,0 +1,92 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container, .setting-container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form.form-main, form.form-setting {
+    width: 100%;
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="checkbox"], input[type="radio"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-group label, .radio-group label {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+form.form-setting input[type="text"] {
+    display: block;
+    width: calc(100% - 20px);
+    margin-bottom: 0.5rem;
+}
+
+form.form-setting button {
+    display: block;
+    width: fit-content;
+    padding: 10px 15px;
+    margin: 2rem auto 0;
+    clear: both;
+}

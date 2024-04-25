@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/setting">GO Settings</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <form action="/process_url" method="POST" class="form-main">
+                <label for="project_name">Repository_URL:</label><br>
+                <input type="text" name="repository_url" placeholder="Enter the repository URL" required><br>
+                <div class="radio-group">
+                    <label class="radio-inline"><input type="radio" name="language" value="go"> Go</label>
+                    <label class="radio-inline"><input type="radio" name="language" value="java"> Java</label>
+                    <label class="radio-inline"><input type="radio" name="language" value="javascript"> JavaScript</label>
+                    <label class="radio-inline"><input type="radio" name="language" value="cpp"> C++</label>
+                    <label class="radio-inline"><input type="radio" name="language" value="python"> Python</label>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
