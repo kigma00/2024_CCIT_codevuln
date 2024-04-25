@@ -6,7 +6,8 @@ language=$3
 
 echo -e "\033[32m[+] Create database\033[0m $@"
 sleep 2
-source ~/.bashrc
+cd ~
+source ./.bashrc
 codeql database create --language="$language" --source-root="/home/codevuln/target-repo/$directory_name/$clone_directory_name" "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name"
 
 cwe_directories=$(find /home/codevuln/codeql/codeql-repo/$language/ql/src/Security/ -type d -name "CWE*")
@@ -23,6 +24,8 @@ for dir in $cwe_directories; do
         source ~/.bashrc
         
         # CodeQL 분석을 CSV로 실행
+        cd ~
+        source ./.bashrc
         codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$ql_file" --format=csv --output="$csv_output_file"
         echo "CSV output saved to $csv_output_file"
     done
