@@ -153,7 +153,7 @@ def integrate_csv_files(directory_path, output_file):
     else:
         print("No data to process.")
 
-    delete_command = f"mv {directory_path}semgrep.csv /home/codevuln/ && rm -rf {directory_path}*.csv && mv /home/codevuln/semgrep.csv {directory_path} && exit"
+    delete_command = f"mv {directory_path}/semgrep.csv /home/codevuln/ && rm -rf {directory_path}/*.csv && mv /home/codevuln/semgrep.csv {directory_path} && exit"
     subprocess.run(delete_command, shell=True, check=True, cwd=directory_path)  
 
 
