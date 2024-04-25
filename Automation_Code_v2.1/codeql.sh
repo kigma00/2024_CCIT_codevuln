@@ -32,5 +32,5 @@ for dir in $cwe_directories; do
 done
 
 # Python 스크립트를 호출하여 CSV 파일에 헤더를 추가하고 파일을 통합
-python3 /home/goranie/2024_CCIT_codevuln/Automation_Code/process_csv_files.py $directory_name $clone_directory_name
+python3 /home/codevuln/codeql/json_csv.py $directory_name $clone_directory_name
 echo "Python script executed successfully."
