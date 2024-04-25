@@ -10,10 +10,10 @@ run_semgrep_scan () {
   local output_prefix=$2 
   echo -e "\033[32m[RUN] Semgrep $output_prefix scan\033[0m"
   cd $base_dir || exit  
-  cp /home/codevuln/semgrep/json_csv.py ./  
+  cp /home/codevuln/semgrep/semgrep_json_csv.py ./  
   
   semgrep --config=p/$config $clone_path --json > ./results.json  
-  python3 ./json_csv.py 
+  python3 ./semgrep_json_csv.py
   mv ./result.csv ./$output_prefix.csv  
   mv ./results.json ./$output_prefix.json  
   rm -f ./json_csv.py  
