@@ -47,6 +47,10 @@ codevuln_setting() {
     mkdir /home/codevuln/semgrep/
     mkdir /home/codevuln/sonarqube/
     mkdir /home/codevuln/target-repo/
+
+    chmod +x ./codeql_integrate_csv.py && mv ./codeql_integrate_csv.py /home/codevuln/codeql/
+    chmod +x ./semgrep_integrate_csv.py && mv ./semgrep_integrate_csv.py /home/codevuln/semgrep/ 
+    chmod +x ./semgrep_json_csv.py && mv ./semgrep_json_csv.py /home/codevuln/semgrep
     
     echo -e "\033[32m[+] codeQL Install & Setting\033[0m $@"
     cd /home/codevuln/codeql
