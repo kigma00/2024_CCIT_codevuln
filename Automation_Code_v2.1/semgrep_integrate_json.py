@@ -2,6 +2,8 @@ import os
 import json
 import subprocess
 
+directory_name = sys.argv[1]
+
 directory = f"/home/codevuln/target-repo/{directory_name}/semgrep"
 output_filename = "semgrep.json"
 data = {}
