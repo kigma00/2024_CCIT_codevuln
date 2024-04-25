@@ -16,7 +16,7 @@ run_semgrep_scan () {
   python3 ./semgrep_json_csv.py
   mv ./result.csv ./$output_prefix.csv  
   mv ./results.json ./$output_prefix.json  
-  rm -f ./json_csv.py  
+  rm -f ./semgrep_json_csv.py
 }
 
 declare -A scans=(
