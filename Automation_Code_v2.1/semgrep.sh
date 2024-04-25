@@ -22,7 +22,14 @@ run_semgrep_scan () {
 declare -A scans=(
   ["default"]="default"
   ["cwe-top-25"]="cwe-top-25"
-
+  ["owasp-top-ten"]="owasp-top-ten"
+  ["r2c-security-audit"]="r2c-security-audit"
+  ["command-injection"]="command-injection"
+  ["insecure-transport"]="insecure-transport"
+  ["jwt"]="jwt"
+  ["secrets"]="secrets"
+  ["sql-injection"]="sql-injection"
+  ["xss"]="xss"
 )
 
 for config in "${!scans[@]}"; do
