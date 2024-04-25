@@ -37,4 +37,4 @@ for config in "${!scans[@]}"; do
 done
 
 python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "/home/codevuln/target-repo/$directory_name/semgrep" "/home/codevuln/target-repo/$directory_name/semgrep/semgrep.csv"
-python3 /home/codevuln/semgrep/semgrep_integrate_json.py "$directory_name" &
+python3 /home/codevuln/semgrep/semgrep_integrate_json.py $directory_name &
