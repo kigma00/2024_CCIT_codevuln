@@ -69,8 +69,8 @@ if __name__ == "__main__":
 
     directory_name = sys.argv[1]
     base_directory = f"/home/codevuln/target-repo/{directory_name}/codeql"
-    output_csv_file = f"{base_directory}.csv"
-    output_json_file = f"{base_directory}.json"  # JSON 파일 경로 설정
+    output_csv_file = f"{base_directory}/codeql.csv"
+    output_json_file = f"{base_directory}/codeql.json"  # JSON 파일 경로 설정
     
     # Define headers to add to each CSV file
     headers = ['Name', 'Explanation', 'Severity', 'Message', 'Path', 'Start_Line', 'Start_Column', 'End_Line', 'End_Column']
