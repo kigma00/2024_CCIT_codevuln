@@ -37,4 +37,9 @@ for config in "${!scans[@]}"; do
 done
 
 python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "/home/codevuln/target-repo/$directory_name/semgrep" "/home/codevuln/target-repo/$directory_name/semgrep/semgrep.csv"
-python3 /home/codevuln/semgrep/semgrep_integrate_json.py $directory_name &
+
+cd /home/codevuln/target-repo/$directory_name/semgrep
+jq -s '[.[][]]' ./default.json ./owasp-top-ten.json ./r2c-security-audit.json ./cwe-top-25.json ./owasp-top-ten.json ./r2c-security-audit.json ./command-injection.json ./insecure-transport.json ./jwt.json ./secrets.json ./sql-injection.json ./xss.json > semgrep.json
+mv semgrep.json ..
+rm -f ./*.json
+mv ../semgrep.json ./
