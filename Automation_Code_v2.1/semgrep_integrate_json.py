@@ -21,7 +21,9 @@ with open(os.path.join(directory, output_filename), 'w') as f:
 
 print(f"All JSON files have been merged into {output_filename} in the directory {directory}.")
 
-subprocess.run(['jq', '.', 'semgrep.json'], stdout=open('semgrep.json', 'w'))
+# jq 명령어 실행
+subprocess.run(['jq', '.', 'semgrep.json'], stdout=open('semgrep.json', 'w'), cwd=directory)
 
-delete_command = f"mv /home/codevuln/target-repo/{directory_name}/semgrep/semgrep.json /home/codevuln && rm -rf /home/codevuln/target-repo/{directory_name}/semgrep/*.json && mv /home/codevuln/semgrep.json /home/codevuln/target-repo/{directory_name}/semgrep/semgrep.json"
-subprocess.run(delete_command, shell=True, check=True, cwd = f"/home/codevuln/target-repo/{directory_name}/semgrep/")
+# 삭제 명령어 실행
+delete_command = f"mv semgrep.json /home/codevuln && rm -rf {directory}/*.json && mv /home/codevuln/semgrep.json {directory}/semgrep.json"
+subprocess.run(delete_command, shell=True, check=True)
