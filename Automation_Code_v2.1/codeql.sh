@@ -31,6 +31,9 @@ for dir in $cwe_directories; do
     done
 done
 
+SCRIPT_PATH=$(readlink -f "$0")
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+
 # Python 스크립트를 호출하여 CSV 파일에 헤더를 추가하고 파일을 통합
-python3 "$(dirname "$0")/process_csv_files.py" "$directory_name" "$clone_directory_name"
+python3 "${SCRIPT_DIR}/process_csv_files.py" "$directory_name" "$clone_directory_name"
 echo "Python script executed successfully."
