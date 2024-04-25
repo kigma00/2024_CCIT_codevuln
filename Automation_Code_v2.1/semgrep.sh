@@ -36,4 +36,4 @@ for config in "${!scans[@]}"; do
   run_semgrep_scan $config ${scans[$config]}
 done
 
-python3 /home/codevuln/semgrep/integrate_csv_files.py "/home/codevuln/target-repo/$directory_name/semgrep" "/home/codevuln/target-repo/$directory_name/semgrep/semgrep.csv"
+python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "/home/codevuln/target-repo/$directory_name/semgrep" "/home/codevuln/target-repo/$directory_name/semgrep/semgrep.csv"
