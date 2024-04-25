@@ -43,3 +43,5 @@ jq -s '[.[][]]' ./default.json ./owasp-top-ten.json ./r2c-security-audit.json ./
 mv semgrep.json ..
 rm -f ./*.json
 mv ../semgrep.json ./
+
+exit 0
