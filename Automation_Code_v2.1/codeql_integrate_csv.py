@@ -58,9 +58,11 @@ def convert_csv_to_json(csv_file_path, json_file_path):
 def delete_original_csv_files(directory_path):
     csv_files = [file for file in os.listdir(directory_path) if file.endswith('.csv')]
     for file in csv_files:
-        file_path = os.path.join(directory_path, file)
-        os.remove(file_path)
-        print(f"Deleted original CSV file: {file_path}")
+        if file != 'codeql.csv':  # codeql.csv 파일을 제외하고 삭제
+            file_path = os.path.join(directory_path, file)
+            os.remove(file_path)
+            print(f"Deleted original CSV file: {file_path}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
