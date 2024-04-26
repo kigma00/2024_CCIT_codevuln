@@ -11,8 +11,8 @@ with open('result.csv', 'w', newline='') as csvfile:
         if 'extra' in result:
             metadata_fields.update(result['extra'].keys())
 
-    fieldnames = ['path', 'start_col', 'start_line', 'start_offset',
-                  'end_col', 'end_line', 'end_offset', 'message', 'severity', 'rule_id']
+    fieldnames = ['path', 'start_col', 'start_line',
+                  'end_col', 'end_line', 'rule_id']
     fieldnames += sorted(list(metadata_fields))
 
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -23,12 +23,8 @@ with open('result.csv', 'w', newline='') as csvfile:
             'path': result.get('path', ''),
             'start_col': result.get('start', {}).get('col', ''),
             'start_line': result.get('start', {}).get('line', ''),
-            'start_offset': result.get('start', {}).get('offset', ''),
             'end_col': result.get('end', {}).get('col', ''),
             'end_line': result.get('end', {}).get('line', ''),
-            'end_offset': result.get('end', {}).get('offset', ''),
-            'message': result.get('message', ''),
-            'severity': result.get('severity', ''),
             'rule_id': result.get('check_id', '')
         }
 
