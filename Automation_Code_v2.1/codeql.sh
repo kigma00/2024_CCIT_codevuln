@@ -24,9 +24,6 @@ for dir in $cwe_directories; do
         # CSV 파일 경로 생성
         csv_output_file="/home/codevuln/target-repo/$directory_name/codeql/$(basename ${ql_file%.ql}).csv"
         
-        
-
-        
         codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$ql_file" --format=csv --output="$csv_output_file"
         echo "CSV output saved to $csv_output_file"
     done
