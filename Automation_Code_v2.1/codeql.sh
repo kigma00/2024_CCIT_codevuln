@@ -26,6 +26,8 @@ for dir in $cwe_directories; do
         # CodeQL 분석을 CSV로 실행
         cd ~
         source ./.bashrc
+
+        
         codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$ql_file" --format=csv --output="$csv_output_file"
         echo "CSV output saved to $csv_output_file"
     done
