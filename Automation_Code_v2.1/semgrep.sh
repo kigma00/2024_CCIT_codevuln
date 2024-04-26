@@ -38,6 +38,14 @@ done
 
 python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "/home/codevuln/target-repo/$directory_name/semgrep" "/home/codevuln/target-repo/$directory_name/semgrep/semgrep.csv"
 
+cp /home/codevuln/semgrep/semgrep_column_delete.py $base_dir
+python3 semgrep_column_delete.py
+rm -rf ./semgrep_column_delete.py
+
+cp /home/codevuln/semgrep/semgrep_column_order.py $base_dir
+python3 semgrep_column_order.py
+rm -rf ./semgrep_column_order.py
+
 cd /home/codevuln/target-repo/$directory_name/semgrep
 jq -s '[.[][]]' ./default.json ./owasp-top-ten.json ./r2c-security-audit.json ./cwe-top-25.json ./owasp-top-ten.json ./r2c-security-audit.json ./command-injection.json ./insecure-transport.json ./jwt.json ./secrets.json ./sql-injection.json ./xss.json > semgrep.json
 mv semgrep.json ..
