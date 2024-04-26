@@ -6,4 +6,4 @@ columns_to_drop = ['dataflow_trace', 'engine_kind', 'fingerprint', 'is_ignored',
 
 df.drop(columns=columns_to_drop, inplace=True)
 
-df.to_csv('updated_result.csv', index=False)
+df.to_csv('semgrep.csv', index=False)
