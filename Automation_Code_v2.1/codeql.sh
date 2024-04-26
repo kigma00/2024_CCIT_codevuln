@@ -2,11 +2,6 @@
 
 # 환경 설정 소스
 source ~/.bashrc
-        
-# CodeQL 분석을 CSV로 실행
-cd ~
-source ./.bashrc
-
 export 
 
 directory_name=$1
