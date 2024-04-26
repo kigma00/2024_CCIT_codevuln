@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('result.csv')
+df = pd.read_csv('semgrep.csv')
 
 columns_to_drop = ['dataflow_trace', 'engine_kind', 'fingerprint', 'is_ignored', 'validation_state', 'metavars']
 
