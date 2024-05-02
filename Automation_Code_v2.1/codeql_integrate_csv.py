@@ -5,6 +5,7 @@ import json
 import glob
 import pandas as pd
 from datetime import datetime
+import shutil
 
 def add_datetime_and_combine_csv(directory_path, output_file, headers):
     """
@@ -87,6 +88,17 @@ if __name__ == "__main__":
     # Delete original CSV files
     delete_original_csv_files(base_directory)
     
-    mv "${base_directory}/codeql.csv" "/home/codevuln/target-repo/${directory_name}/scan_result"
-    mv "${base_directory}/codeql.json" "/home/codevuln/target-repo/${directory_name}/scan_result"
-    rm -rf "/home/codevuln/target-repo/${directory_name}/codeql"
+    # 파일 이동
+    try:
+        # codeql.csv 파일 이동
+        shutil.move(f"{base_directory}/codeql.csv", f"/home/codevuln/target-repo/{directory_name}/scan_result")
+        # codeql.json 파일 이동
+        shutil.move(f"{base_directory}/codeql.json", f"/home/codevuln/target-repo/{directory_name}/scan_result")
+    except Exception as e:
+        print(f"Error moving files: {e}")
+
+    # 디렉토리 삭제
+    try:
+        shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
+    except Exception as e:
+        print(f"Error removing directory: {e}")
