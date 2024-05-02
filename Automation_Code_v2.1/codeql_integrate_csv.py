@@ -86,4 +86,7 @@ if __name__ == "__main__":
 
     # Delete original CSV files
     delete_original_csv_files(base_directory)
-
+    
+    mv "${base_directory}/codeql.csv" "/home/codevuln/target-repo/${directory_name}/scan_result"
+    mv "${base_directory}/codeql.json" "/home/codevuln/target-repo/${directory_name}/scan_result"
+    rm -rf "/home/codevuln/target-repo/${directory_name}/codeql"
