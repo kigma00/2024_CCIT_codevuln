@@ -24,6 +24,7 @@ mkdir "/home/codevuln/target-repo/$directory_name"
 mkdir "/home/codevuln/target-repo/$directory_name/codeql"
 mkdir "/home/codevuln/target-repo/$directory_name/semgrep"
 mkdir "/home/codevuln/target-repo/$directory_name/sonarqube"
+mkdir "/home/codevuln/target-repo/$directory_name/scan_result"
 
 clear
 echo -e "\033[32m[+] codeQL\033[0m $@"
