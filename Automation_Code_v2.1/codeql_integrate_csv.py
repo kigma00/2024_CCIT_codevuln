@@ -22,8 +22,9 @@ def add_datetime_and_combine_csv(directory_path, output_file, headers):
             df = pd.read_csv(file_path, header=None)  # CSV 파일 읽기, 파일에 헤더가 없다고 가정
             if not df.empty:
                 df.columns = headers  # 헤더 할당
-                df.insert(0, 'Time', current_time)  # 두 번째 열에 시각 추가
+                df.insert(1, 'Time', current_time)  # 두 번째 열에 시각 추가
                 df.insert(0, 'Date', current_date)  # 첫 번째 열에 날짜 추가
+                
                 frames.append(df)
         except pd.errors.EmptyDataError:
             print(f"Skipping empty or invalid file: {file_path}")
