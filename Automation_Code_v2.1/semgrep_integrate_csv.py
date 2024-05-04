@@ -17,6 +17,8 @@ def integrate_csv_files(directory_path, output_file):
                 
     if frames:
         result = pd.concat(frames, ignore_index=True)
+
+        result.insert(0, 'tool', 'Semgrep')
         
         today_date = datetime.now().strftime('%Y-%m-%d')
         result.insert(0, 'date', today_date)
