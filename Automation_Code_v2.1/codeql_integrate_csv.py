@@ -11,6 +11,7 @@ def add_datetime_and_combine_csv(directory_path, output_file, headers):
     """
     지정된 디렉토리의 모든 CSV 파일에서 데이터를 확인하고,
     비어있지 않은 파일에 헤더와 현재 날짜와 시각을 추가한 후 모든 파일을 하나로 통합한다.
+    'Tool' 열을 추가하여 모든 행에 'CodeQL' 값을 설정한다.
     """
     current_date = datetime.now().strftime('%Y-%m-%d')
     current_time = datetime.now().strftime('%H:%M:%S')
@@ -22,9 +23,9 @@ def add_datetime_and_combine_csv(directory_path, output_file, headers):
             df = pd.read_csv(file_path, header=None)  # CSV 파일 읽기, 파일에 헤더가 없다고 가정
             if not df.empty:
                 df.columns = headers  # 헤더 할당
-                df.insert(1, 'Time', current_time)  # 두 번째 열에 시각 추가
-                df.insert(0, 'Date', current_date)  # 첫 번째 열에 날짜 추가
-                
+                df.insert(0, 'Tool', 'CodeQL')  # 첫 번째 열에 'Tool' 추가
+                df.insert(1, 'Date', current_date)  # 두 번째 열에 날짜 추가
+                df.insert(2, 'Time', current_time)  # 세 번째 열에 시각 추가
                 frames.append(df)
         except pd.errors.EmptyDataError:
             print(f"Skipping empty or invalid file: {file_path}")
