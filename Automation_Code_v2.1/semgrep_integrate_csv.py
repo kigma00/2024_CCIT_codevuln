@@ -21,10 +21,10 @@ def integrate_csv_files(directory_path, output_file):
         result.insert(0, 'tool', 'Semgrep')
         
         today_date = datetime.now().strftime('%Y-%m-%d')
-        result.insert(0, 'date', today_date)
+        result.insert(1, 'date', today_date)
         
         current_time = datetime.now().strftime('%H:%M:%S')
-        result.insert(1, 'time', current_time)
+        result.insert(2, 'time', current_time)
         
         result.to_csv(output_file, index=False)
         print(f"Output saved to {output_file}")
