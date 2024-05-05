@@ -21,9 +21,9 @@ def add_datetime_and_combine_csv(directory_path, output_file, headers):
                 df.columns = headers  # 헤더 할당
                 # 열을 새 데이터프레임에 추가
                 new_df = pd.DataFrame({
-                    'Tool': ['CodeQL'] * len(df),
-                    'Date': [current_date] * len(df),
-                     'Time': [current_time] * len(df)
+                    'tool': ['CodeQL'] * len(df),
+                    'date': [current_date] * len(df),
+                     'time': [current_time] * len(df)
                 })
                 new_df = pd.concat([new_df, df], axis=1)
                 frames.append(new_df)
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     output_json_file = f"{base_directory}/codeql.json"  # JSON 파일 경로 설정
     
     # Define headers to add to each CSV file
-    headers = ['Name', 'Explanation', 'Severity', 'Message', 'Path', 'Start_Line', 'Start_Column', 'End_Line', 'End_Column']
+    headers = ['name', 'explanation', 'severity', 'message', 'path', 'start_line', 'start_col', 'end_line', 'end_col']
 
     # Process CSV files by adding date/time and combining them
     combined_df = add_datetime_and_combine_csv(base_directory, output_csv_file, headers)
