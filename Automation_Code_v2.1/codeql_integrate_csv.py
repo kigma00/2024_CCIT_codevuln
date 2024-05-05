@@ -7,26 +7,26 @@ import pandas as pd
 from datetime import datetime
 import shutil
 
-def add_datetime_and_combine_csv(directory_path, output_file, headers):
-    """
-    지정된 디렉토리의 모든 CSV 파일에서 데이터를 확인하고,
-    비어있지 않은 파일에 헤더와 현재 날짜와 시각을 추가한 후, 'Tool' 열을 추가하여 'CodeQL' 값으로 설정하고,
-    모든 파일을 하나로 통합한다.
-    """
-    current_date = datetime.now().strftime('%Y-%m-%d')
-    current_time = datetime.now().strftime('%H:%M:%S')
-    frames = []
+def add_datetime_and_combine_csv(directory_path, output_file, headers): 
+    current_date = datetime.now().strftime('%Y-%m-%d')       
+    current_time = datetime.now().strftime('%H:%M:%S')      
+    frames = []                      
 
-    csv_files = glob.glob(os.path.join(directory_path, '*.csv'))
-    for file_path in csv_files:
-        try:
+    csv_files = glob.glob(os.path.join(directory_path, '*.csv'))                           
+    for file_path in csv_files:                                                                
+        try:                                                                                       
             df = pd.read_csv(file_path, header=None)  # CSV 파일 읽기, 파일에 헤더가 없다고 가정
+        
             if not df.empty:
                 df.columns = headers  # 헤더 할당
-                df.insert(0, 'Time', current_time)  # 두 번째 열에 시각 추가
-                df.insert(0, 'Date', current_date)  # 첫 번째 열에 날짜 추가
-                df.insert(0, 'Tool', 'CodeQL')  # 첫 번째 열에 'Tool' 추가, 'CodeQL'로 설정
-                frames.append(df)
+                # 열을 새 데이터프레임에 추가
+                new_df = pd.DataFrame({
+                    'Tool': ['CodeQL'] * len(df),
+                    'Date': [current_date] * len(df),
+                     'Time': [current_time] * len(df)
+                })
+                new_df = pd.concat([new_df, df], axis=1)
+                frames.append(new_df)
         except pd.errors.EmptyDataError:
             print(f"Skipping empty or invalid file: {file_path}")
             continue
