@@ -61,7 +61,7 @@ codevuln_setting() {
     git clone https://github.com/github/codeql /home/codevuln/codeql/codeql-repo
     echo -e "\033[32m[+] codeql repo download complete\033[0m $@"
 
-    wget https://github.com/github/codeql-cli-binaries/releases/download/v2.17.0/codeql-linux64.zip
+    wget https://github.com/github/codeql-cli-binaries/releases/download/v2.17.2/codeql-linux64.zip
     unzip codeql-linux64.zip
     mv ./codeql ./codeql-cli
     rm -rf /home/codevuln/codeql/codeql-linux64.zip
