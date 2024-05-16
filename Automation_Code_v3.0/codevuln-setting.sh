@@ -46,6 +46,22 @@ codevuln_setting() {
         fi
     done
 
+    # nvm 설치 및 설정
+    echo -e "\033[32m[+] nvm Install & Setting\033[0m $@"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    # 최신 LTS 버전의 Node.js 설치 및 기본 설정
+    nvm install --lts
+    nvm alias default 'lts/*'
+    nvm use default
+
+    # 설치된 Node.js 버전 확인
+    node -v
+    npm -v
+
     mkdir /home/codevuln/
     mkdir /home/codevuln/codeql/
     mkdir /home/codevuln/semgrep/
