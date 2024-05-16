@@ -130,7 +130,6 @@ END
     echo -e "\033[32m[+] SonarQube Install & Setting complete\033[0m $@"
 
     echo -e "\033[32m[README] Please copy the URL and login from the browser\033[0m $@"
-    semgrep login
 }
 
 clear
