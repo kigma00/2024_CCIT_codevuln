@@ -3,8 +3,8 @@
 directory_name=$1
 clone_directory_name=$2
 language=$3
-date=$(date +"%y%m%d")
-time=$(date +"%H%M%S")
+DATE=$(date +"%y%m%d")
+TIME=$(date +"%H%M%S")
 
 echo -e "\033[32m[+] Create database\033[0m $@"
 sleep 2
@@ -15,7 +15,7 @@ codeql database create --language="$language" --source-root="/home/codevuln/targ
 cwe_directories="/home/codevuln/codeql/codeql-repo/$language/ql/src/Security"
 
 # CSV 파일 경로 생성
-csv_output_file="/home/codevuln/scan_result/$date"_"$time"_"$directory_name/$d:irectory_name.csv"
+csv_output_file="/home/codevuln/scan_result/$DATE"_"$TIME"_"$directory_name/$d:irectory_name.csv"
 
 codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$cwe_directories" --format=csv --output="$csv_output_file"
 
