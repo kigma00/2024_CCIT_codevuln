@@ -15,7 +15,7 @@ codeql database create --language="$language" --source-root="/home/codevuln/targ
 cwe_directories="/home/codevuln/codeql/codeql-repo/$language/ql/src/Security"
 
 # CSV 파일 경로 생성
-csv_output_file="/home/codevuln/scan_result/$DATE"_"$TIME"_"$directory_name/$d:irectory_name.csv"
+csv_output_file="/home/codevuln/scan_result/$DATE"_"$TIME"_"$directory_name/$directory_name.csv"
 
 codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$cwe_directories" --format=csv --output="$csv_output_file"
 
