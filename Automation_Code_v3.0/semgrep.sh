@@ -1,6 +1,8 @@
 #!/bin/bash
 directory_name=$1
 clone_directory_name=$2
+DATE=$(date +"%y%m%d")
+TIME=$(date +"%H%M%S")
 
 base_dir="/home/codevuln/target-repo/$directory_name/semgrep"
 clone_path="/home/codevuln/target-repo/$directory_name/$clone_directory_name"
