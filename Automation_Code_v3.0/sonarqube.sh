@@ -2,6 +2,8 @@
 
 directory_name=$1
 clone_directory_name=$2
+DATE=$(date +"%y%m%d")
+TIME=$(date +"%H%M%S")
 
 # 토큰 파일에서 토큰 값을 읽어옴
 token=$(tail -n 1 token.txt)
@@ -56,10 +58,10 @@ try:
         issues.sort(key=lambda x: severity_order.index(x.get('severity')))
 
         # CSV 파일 경로 및 이름 설정
-        csv_file_path = f"/home/codevuln/target-repo/{directory_name}/scan_result/sonarqube.csv"
+        csv_file_path = f"/home/codevuln/scan_result/{DATE}_{TIME}_{directory_name}/sonarqube.csv"
 
         # JSON 파일 경로 및 이름 설정
-        json_file_path = f"/home/codevuln/target-repo/{directory_name}/scan_result/sonarqube.json"
+        json_file_path = f"/home/codevuln/scan_result/{DATE}_{TIME}_{directory_name}/sonarqube.json"
 
         # 현재 시간과 날짜를 가져오기
         current_datetime = datetime.now()
