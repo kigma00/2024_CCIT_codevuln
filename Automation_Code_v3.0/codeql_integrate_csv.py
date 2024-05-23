@@ -68,8 +68,11 @@ if __name__ == "__main__":
     time = sys.argv[4]
 
     base_directory = f"/home/codevuln/target-repo/{directory_name}/codeql"
-    output_csv_file = f"{base_directory}/codeql.csv"
-    output_json_file = f"{base_directory}/codeql.json"  # JSON 파일 경로 설정
+    output_directory = f"/home/codevuln/scan_result/{date}_{time}_{directory_name}"
+    os.makedirs(output_directory, exist_ok=True)  # output 디렉토리를 생성
+    
+    output_csv_file = f"{output_directory}/codeql.csv"
+    output_json_file = f"{output_directory}/codeql.json"  # JSON 파일 경로 설정
     
     # Define headers to add to each CSV file
     headers = ['name', 'explanation', 'severity', 'message', 'path', 'start_line', 'start_col', 'end_line', 'end_col']
@@ -81,17 +84,8 @@ if __name__ == "__main__":
     if not combined_df.empty:
         convert_csv_to_json(output_csv_file, output_json_file)
 
-    # 파일 이동
-    # try:
-    #     # codeql.csv 파일 이동
-    #     shutil.move(f"{base_directory}/codeql.csv", f"/home/codevuln/target-repo/{directory_name}/scan_result")
-    #     # codeql.json 파일 이동
-    #     shutil.move(f"{base_directory}/codeql.json", f"/home/codevuln/target-repo/{directory_name}/scan_result")
-    # except Exception as e:
-    #     print(f"Error moving files: {e}")
-
     # 디렉토리 삭제
-    # try:
-    #     shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
-    # except Exception as e:
-    #     print(f"Error removing directory: {e}")
+    try:
+        shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
+    except Exception as e:
+        print(f"Error removing directory: {e}")
