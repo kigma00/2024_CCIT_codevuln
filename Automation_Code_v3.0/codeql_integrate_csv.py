@@ -91,16 +91,16 @@ if __name__ == "__main__":
     delete_original_csv_files(base_directory)
     
     # 파일 이동
-    try:
+    #try:
         # codeql.csv 파일 이동
-        shutil.move(f"{base_directory}/codeql.csv", f"/home/codevuln/target-repo/{directory_name}/scan_result")
+        #shutil.move(f"{base_directory}/codeql.csv", f"/home/codevuln/target-repo/{directory_name}/scan_result")
         # codeql.json 파일 이동
-        shutil.move(f"{base_directory}/codeql.json", f"/home/codevuln/target-repo/{directory_name}/scan_result")
-    except Exception as e:
-        print(f"Error moving files: {e}")
+        #shutil.move(f"{base_directory}/codeql.json", f"/home/codevuln/target-repo/{directory_name}/scan_result")
+    #except Exception as e:
+        #print(f"Error moving files: {e}")
 
     # 디렉토리 삭제
-    try:
-        shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
-    except Exception as e:
-        print(f"Error removing directory: {e}")
+    #try:
+        #shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
+    #except Exception as e:
+        #print(f"Error removing directory: {e}")
