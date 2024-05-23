@@ -7,12 +7,10 @@ import pandas as pd
 from datetime import datetime
 import shutil
 
-def add_datetime_and_combine_csv(directory_path, output_file, headers): 
-    current_date = datetime.now().strftime('%Y-%m-%d')       
-    current_time = datetime.now().strftime('%H:%M:%S')      
+def add_datetime_and_combine_csv(directory_path, output_file, headers, date, time): 
     frames = []                      
-
     csv_files = glob.glob(os.path.join(directory_path, '*.csv'))                           
+    
     for file_path in csv_files:                                                                
         try:                                                                                       
             df = pd.read_csv(file_path, header=None)  # CSV 파일 읽기, 파일에 헤더가 없다고 가정
@@ -22,8 +20,8 @@ def add_datetime_and_combine_csv(directory_path, output_file, headers):
                 # 열을 새 데이터프레임에 추가
                 new_df = pd.DataFrame({
                     'tool': ['CodeQL'] * len(df),
-                    'date': [current_date] * len(df),
-                     'time': [current_time] * len(df)
+                    'date': [date] * len(df),
+                    'time': [time] * len(df)
                 })
                 new_df = pd.concat([new_df, df], axis=1)
                 frames.append(new_df)
@@ -58,21 +56,17 @@ def convert_csv_to_json(csv_file_path, json_file_path):
             # JSON 배열 형식으로 저장
             json.dump(json_data, json_file, indent=4)
 
-def delete_original_csv_files(directory_path):
-    csv_files = [file for file in os.listdir(directory_path) if file.endswith('.csv')]
-    for file in csv_files:
-        if file != 'codeql.csv':  # codeql.csv 파일을 제외하고 삭제
-            file_path = os.path.join(directory_path, file)
-            os.remove(file_path)
-            print(f"Deleted original CSV file: {file_path}")
-
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python3 process_csv_files.py <directory_name> <output_file>")
+    if len(sys.argv) < 5:
+        print("Usage: python3 codeql_integrate_csv.py <directory_name> <clone_directory_name> <date> <time>")
         sys.exit(1)
 
     directory_name = sys.argv[1]
+    clone_directory_name = sys.argv[2]
+    date = sys.argv[3]
+    time = sys.argv[4]
+
     base_directory = f"/home/codevuln/target-repo/{directory_name}/codeql"
     output_csv_file = f"{base_directory}/codeql.csv"
     output_json_file = f"{base_directory}/codeql.json"  # JSON 파일 경로 설정
@@ -81,26 +75,23 @@ if __name__ == "__main__":
     headers = ['name', 'explanation', 'severity', 'message', 'path', 'start_line', 'start_col', 'end_line', 'end_col']
 
     # Process CSV files by adding date/time and combining them
-    combined_df = add_datetime_and_combine_csv(base_directory, output_csv_file, headers)
+    combined_df = add_datetime_and_combine_csv(base_directory, output_csv_file, headers, date, time)
 
     # Convert the combined CSV to JSON
     if not combined_df.empty:
         convert_csv_to_json(output_csv_file, output_json_file)
 
-    # Delete original CSV files
-    delete_original_csv_files(base_directory)
-    
     # 파일 이동
-    #try:
-        # codeql.csv 파일 이동
-        #shutil.move(f"{base_directory}/codeql.csv", f"/home/codevuln/target-repo/{directory_name}/scan_result")
-        # codeql.json 파일 이동
-        #shutil.move(f"{base_directory}/codeql.json", f"/home/codevuln/target-repo/{directory_name}/scan_result")
-    #except Exception as e:
-        #print(f"Error moving files: {e}")
+    # try:
+    #     # codeql.csv 파일 이동
+    #     shutil.move(f"{base_directory}/codeql.csv", f"/home/codevuln/target-repo/{directory_name}/scan_result")
+    #     # codeql.json 파일 이동
+    #     shutil.move(f"{base_directory}/codeql.json", f"/home/codevuln/target-repo/{directory_name}/scan_result")
+    # except Exception as e:
+    #     print(f"Error moving files: {e}")
 
     # 디렉토리 삭제
-    #try:
-        #shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
-    #except Exception as e:
-        #print(f"Error removing directory: {e}")
+    # try:
+    #     shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
+    # except Exception as e:
+    #     print(f"Error removing directory: {e}")
