@@ -54,6 +54,7 @@ mv semgrep.json ..
 rm -f ./*.json
 mv ../semgrep.json ./
 
+# 결과 이동
 mv /home/codevuln/target-repo/${directory_name}/semgrep/semgrep.csv /home/codevuln/target-repo/${directory_name}/scan_result
 mv /home/codevuln/target-repo/${directory_name}/semgrep/semgrep.json /home/codevuln/target-repo/${directory_name}/scan_result
 rm -rf /home/codevuln/target-repo/${directory_name}/semgrep
