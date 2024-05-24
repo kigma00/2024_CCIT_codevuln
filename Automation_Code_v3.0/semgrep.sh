@@ -38,7 +38,7 @@ for config in "${!scans[@]}"; do
   run_semgrep_scan $config ${scans[$config]}
 done
 
-python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "/home/codevuln/target-repo/$directory_name/semgrep" "/home/codevuln/target-repo/$directory_name/semgrep/semgrep.csv"
+python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "$base_dir" "$clone_path"
 
 cp /home/codevuln/semgrep/semgrep_column_delete.py $base_dir
 python3 semgrep_column_delete.py
@@ -53,10 +53,5 @@ jq -s '[.[][]]' ./default.json ./owasp-top-ten.json ./r2c-security-audit.json ./
 mv semgrep.json ..
 rm -f ./*.json
 mv ../semgrep.json ./
-
-# 결과 이동
-mv /home/codevuln/target-repo/${directory_name}/semgrep/semgrep.csv /home/codevuln/target-repo/${directory_name}/scan_result
-mv /home/codevuln/target-repo/${directory_name}/semgrep/semgrep.json /home/codevuln/target-repo/${directory_name}/scan_result
-rm -rf /home/codevuln/target-repo/${directory_name}/semgrep
 
 exit 0
