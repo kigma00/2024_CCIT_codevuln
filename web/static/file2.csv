@@ -1,0 +1,7 @@
+severity,path,start_line,end_line,start_column,end_column,message
+critical,/api/routes/user.js,10,12,12,20,인증되지 않은 사용자 데이터 노출
+high,/api/models/userModel.js,5,5,3,8,평문으로 비밀번호 저장
+medium,/client/components/login.jsx,33,33,15,25,로그인 폼에서 CSRF 취약점
+critical,/api/routes/user.js,10,12,12,20,인증되지 않은 사용자 데이터 노출
+high,/api/models/userModel.js,5,5,3,8,평문으로 비밀번호 저장
+medium,/client/components/login.jsx,33,33,15,25,로그인 폼에서 CSRF 취약점

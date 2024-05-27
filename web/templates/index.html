@@ -39,13 +39,11 @@
 
     <div class="flex justify-center mt-4">
       <form method="post" action="">
-        <label for="url" class="mt-5 font-bold pl-4"
-          >Repository URL</label
-        >
+        <label for="url" class="mt-5 font-bold pl-4">Repository URL</label>
         <div class="flex flex-col space-x-4 space-y-4">
           <div class="relative mt-2">
             <input
-              class="font-medium border-2 border-blue-600 w-11/12 h-10 rounded-full outline-0 bg-gray-100 px-5"
+              class="font-medium border-2 border-blue-600 w-11/12 h-10 rounded-full outline-0 bg-gray-100 px-5 md:w-96 md:mr-10"
               type="text"
               id="url"
               name="url"
@@ -73,138 +71,19 @@
             </button>
           </div>
 
-          <div name="tool_select" class="mb-4">
-            <label for="tool_select" class="mt-5 font-bold"
-            >Select Analysis Tool</label
-          >
-          <div class="flex flex-row space-x-4">
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="analysisType"
-                value="codeql"
-                checked
-              />
-              <span class="ml-2 font-medium">CodeQL</span>
-            </label>
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="analysisType"
-                value="Semgrep"
-                checked
-              />
-              <span class="ml-2 font-medium">Semgrep</span>
-            </label>
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="analysisType"
-                value="SonarQube"
-                checked
-              />
-              <span class="ml-2 font-medium">SonarQube</span>
-            </label>
-          </div>
-
           <div name="language" class="mt-4">
-            <label for="languageType" class="mt-5 font-bold"
-            >Select Language</label
-          >
-          <div class="flex flex-row flex-wrap">
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="c"
-                checked
-              />
-              <span class="ml-2 font-medium">C</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="cpp"
-                checked
-              />
-              <span class="ml-2 font-medium">C++</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="csharp"
-                checked
-              />
-              <span class="ml-2 font-medium">C#</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="go"
-                checked
-              />
-              <span class="ml-2 font-medium">Go</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="java"
-                checked
-              />
-              <span class="ml-2 font-medium">Java</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="javascript"
-                checked
-              />
-              <span class="ml-2 font-medium">JavaScript</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="python"
-                checked
-              />
-              <span class="ml-2 font-medium">Python</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="ruby"
-                checked
-              />
-              <span class="ml-2">Ruby</span>
-            </label>
-            <label class="inline-flex items-center mr-4">
-              <input
-                type="checkbox"
-                class="form-checkbox text-blue-600"
-                name="languageType"
-                value="swift"
-                checked
-              />
-              <span class="ml-2 font-medium">Swift</span>
-            </label>
+            <label for="languageType" class="mt-5 font-bold">Select Language</label>
+            <select name="languageType" id="languageType" class="form-select text-blue-600">
+              <option value="c" selected>C</option>
+              <option value="cpp" >C++</option>
+              <option value="csharp" >C#</option>
+              <option value="go" >Go</option>
+              <option value="java" >Java</option>
+              <option value="javascript" >JavaScript</option>
+              <option value="python" >Python</option>
+              <option value="ruby" >Ruby</option>
+              <option value="swift" >Swift</option>
+            </select>
           </div>
           </div>
         </div>

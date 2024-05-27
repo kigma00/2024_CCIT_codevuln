@@ -1,0 +1,13 @@
+severity,path,start_line,end_line,start_column,end_column,message
+high,/services/paymentService.js,87,90,9,12,결제 정보 암호화 누락
+medium,/config/database.js,10,10,5,14,데이터베이스 재연결 로직 부재
+low,/scripts/deploy.sh,3,3,1,20,하드코딩된 서버 IP 주소
+high,/services/paymentService.js,87,90,9,12,결제 정보 암호화 누락
+medium,/config/database.js,10,10,5,14,데이터베이스 재연결 로직 부재
+low,/scripts/deploy.sh,3,3,1,20,하드코딩된 서버 IP 주소
+high,/services/paymentService.js,87,90,9,12,결제 정보 암호화 누락
+medium,/config/database.js,10,10,5,14,데이터베이스 재연결 로직 부재
+low,/scripts/deploy.sh,3,3,1,20,하드코딩된 서버 IP 주소
+high,/services/paymentService.js,87,90,9,12,결제 정보 암호화 누락
+medium,/config/database.js,10,10,5,14,데이터베이스 재연결 로직 부재
+low,/scripts/deploy.sh,3,3,1,20,하드코딩된 서버 IP 주소

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeVuln</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar {
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+      .sidebar-visible {
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 mx-screen my-screen overflow-x-hidden">
+    <!-- Header -->
+    <header
+      class="w-screen h-14 bg-white flex justify-between items-center shadow shadow-md"
+    >
+      <a href="/" class="flex flex-row items-center mx-8">
+        <img src="static/codevuln.png" class="w-8" />
+        <p class="font-bold text-2xl">Result</p>
+      </a>
+      <div class="flex flex-row items-center mx-8 space-x-8">
+        <a href="/result" class="font-bold text2xl text-blue-500">Result</a>
+        <a href="/dashboard" class="font-bold text2xl hover:text-blue-500"
+          >Dashboard</a
+        >
+        <a href="/setting" class="font-bold text2xl hover:text-blue-500"
+          >Setting</a
+        >
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-2">
+      <!-- Title and Button -->
+      <div class="flex justify-between items-center mb-4 m-4">
+        <h2 class="text-xl" id="csv-filename">Result CSV</h2>
+        <button
+          onclick="toggleSidebar()"
+          class="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          View Options
+        </button>
+      </div>
+
+      <!-- CSV Display Area -->
+      <div class="overflow-auto">
+        <table id="csv-table" class="min-w-full bg-white my-4/5">
+          <!-- CSV Data here -->
+        </table>
+      </div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 w-64 bg-gray-800 text-white p-4 sidebar sidebar-hidden overflow-y-auto"
+    >
+      <input
+        type="text"
+        id="search"
+        class="w-full p-2 mb-4 text-black"
+        placeholder="Search..."
+      />
+      <div id="checkboxes">
+        <label class="block">
+          <input type="checkbox" id="all-columns" checked /> All
+        </label>
+        <!-- Column checkboxes here -->
+      </div>
+    </aside>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar")
+        sidebar.classList.toggle("sidebar-visible")
+        sidebar.classList.toggle("sidebar-hidden")
+      }
+
+      // Function to load CSV data (example CSV parsing)
+      async function loadCSV() {
+        const response = await fetch(
+          "{{ url_for('static', filename='Tools2.csv') }}"
+        )
+        const data = await response.text()
+        const rows = data.split("\n").map((row) => row.split(","))
+
+        const table = document.getElementById("csv-table")
+        table.innerHTML = ""
+
+        // Create table header
+        const headerRow = document.createElement("tr")
+        rows[0].forEach((cell, index) => {
+          const th = document.createElement("th")
+          th.classList.add("p-2", "border", "border-gray-200")
+          th.textContent = cell
+          th.dataset.index = index
+          headerRow.appendChild(th)
+        })
+        table.appendChild(headerRow)
+
+        // Create table body
+        rows.slice(1).forEach((row) => {
+          const tr = document.createElement("tr")
+          row.forEach((cell, index) => {
+            const td = document.createElement("td")
+            td.classList.add("p-2", "border", "border-gray-200")
+            td.textContent = cell
+            td.dataset.index = index
+            tr.appendChild(td)
+          })
+          table.appendChild(tr)
+        })
+
+        // Populate checkboxes
+        const checkboxesDiv = document.getElementById("checkboxes")
+        while (checkboxesDiv.children.length > 1) {
+          checkboxesDiv.removeChild(checkboxesDiv.lastChild)
+        }
+        rows[0].forEach((cell, index) => {
+          const label = document.createElement("label")
+          label.classList.add("block")
+          label.innerHTML = `<input type="checkbox" checked data-index="${index}"> ${cell}`
+          checkboxesDiv.appendChild(label)
+        })
+
+        // Add event listeners for checkboxes
+        checkboxesDiv
+          .querySelectorAll('input[type="checkbox"]')
+          .forEach((checkbox) => {
+            checkbox.addEventListener("change", () => {
+              const index = checkbox.dataset.index
+              const cells = table.querySelectorAll(`[data-index="${index}"]`)
+              cells.forEach((cell) => {
+                cell.style.display = checkbox.checked ? "" : "none"
+              })
+            })
+          })
+
+        // All columns checkbox
+        const allColumnsCheckbox = document.getElementById("all-columns")
+        allColumnsCheckbox.addEventListener("change", () => {
+          const isChecked = allColumnsCheckbox.checked
+          checkboxesDiv
+            .querySelectorAll('input[type="checkbox"]')
+            .forEach((checkbox) => {
+              checkbox.checked = isChecked
+              const index = checkbox.dataset.index
+              const cells = table.querySelectorAll(`[data-index="${index}"]`)
+              cells.forEach((cell) => {
+                cell.style.display = isChecked ? "" : "none"
+              })
+            })
+        })
+      }
+
+      // Function to search in the CSV
+      document.getElementById("search").addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase()
+        const rows = document.querySelectorAll("#csv-table tr")
+        rows.forEach((row) => {
+          const cells = row.querySelectorAll("td")
+          const rowText = Array.from(cells)
+            .map((cell) => cell.textContent.toLowerCase())
+            .join(" ")
+          row.style.display = rowText.includes(searchTerm) ? "" : "none"
+        })
+      })
+
+      // Load the CSV data when the page loads
+      window.onload = loadCSV
+    </script>
+  </body>
+</html>

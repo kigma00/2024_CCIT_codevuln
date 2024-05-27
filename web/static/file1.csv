@@ -1,0 +1,13 @@
+severity,path,start_line,end_line,start_column,end_column,message
+high,/project/src/main.py,15,15,1,4,변수 초기화 누락
+medium,/project/src/utils.py,45,48,5,8,비효율적인 루프 사용
+low,/project/test/test_utils.py,22,22,1,10,매직 넘버 사용
+high,/project/src/main.py,15,15,1,4,변수 초기화 누락
+medium,/project/src/utils.py,45,48,5,8,비효율적인 루프 사용
+low,/project/test/test_utils.py,22,22,1,10,매직 넘버 사용
+high,/project/src/main.py,15,15,1,4,변수 초기화 누락
+medium,/project/src/utils.py,45,48,5,8,비효율적인 루프 사용
+low,/project/test/test_utils.py,22,22,1,10,매직 넘버 사용
+high,/project/src/main.py,15,15,1,4,변수 초기화 누락
+medium,/project/src/utils.py,45,48,5,8,비효율적인 루프 사용
+low,/project/test/test_utils.py,22,22,1,10,매직 넘버 사용
