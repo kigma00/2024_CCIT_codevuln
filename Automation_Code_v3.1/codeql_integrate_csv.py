@@ -67,7 +67,7 @@ if __name__ == "__main__":
     date = sys.argv[3]
     time = sys.argv[4]
 
-    base_directory = f"/home/codevuln/target-repo/{directory_name}/codeql"
+    base_directory = f"/home/codevuln/scan_result/{date}_{time}_{directory_name}"
     output_directory = f"/home/codevuln/scan_result/{date}_{time}_{directory_name}"
     os.makedirs(output_directory, exist_ok=True)  # output 디렉토리를 생성
 
