@@ -21,8 +21,11 @@ csv_output_file="$csv_output_dir/codeql.csv"
 # 디렉토리가 존재하지 않으면 생성
 mkdir -p "$csv_output_dir"
 
-# 지정된 파일 삭제
-rm -rf /home/codevuln/codeql/codeql-repo/javascript/ql/src/Security/CWE-020/ExternalAPIsUsedWithUntrustedData.ql
+# 파일이 존재하면 삭제
+file_to_delete="/home/codevuln/codeql/codeql-repo/javascript/ql/src/Security/CWE-020/ExternalAPIsUsedWithUntrustedData.ql"
+if [ -f "$file_to_delete" ]; then
+    rm -rf "$file_to_delete"
+fi
 
 codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$cwe_directories" --format=csv --output="$csv_output_file"
 
