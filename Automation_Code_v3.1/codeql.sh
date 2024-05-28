@@ -30,6 +30,6 @@ fi
 codeql database analyze "/home/codevuln/target-repo/$directory_name/codeql/codeql-db-$directory_name" "$cwe_directories" --format=csv --output="$csv_output_file"
 
 # Python 스크립트를 호출하여 CSV 파일에 헤더를 추가하고 파일을 통합
-# python3 /home/codevuln/codeql/codeql_integrate_csv.py "$directory_name" "$clone_directory_name" "$DATE" "$TIME"
+python3 /home/codevuln/codeql/codeql_integrate_csv.py "$directory_name" "$clone_directory_name" "$DATE" "$TIME"
 
 echo "Python script executed successfully."
