@@ -57,7 +57,6 @@ def convert_csv_to_json(csv_file_path, json_file_path):
             # JSON 배열 형식으로 저장
             json.dump(json_data, json_file, indent=4)
 
-
 if __name__ == "__main__":
     if len(sys.argv) < 5:
         print("Usage: python3 codeql_integrate_csv.py <directory_name> <clone_directory_name> <date> <time>")
@@ -71,19 +70,18 @@ if __name__ == "__main__":
     base_directory = f"/home/codevuln/target-repo/{directory_name}/codeql"
     output_directory = f"/home/codevuln/scan_result/{date}_{time}_{directory_name}"
     os.makedirs(output_directory, exist_ok=True)  # output 디렉토리를 생성
-    
-    output_csv_file = f"{output_directory}/codeql.csv"
-    output_json_file = f"{output_directory}/codeql.json"  # JSON 파일 경로 설정
-    
+
     # Define headers to add to each CSV file
     headers = ['name', 'explanation', 'severity', 'message', 'path', 'start_line', 'start_col', 'end_line', 'end_col']
 
-    # Process CSV files by adding date/time and combining them
-    combined_df = add_datetime_and_combine_csv(base_directory, output_csv_file, headers, date, time)
+    # Process CSV files by adding date/time
+    add_datetime_to_csv_files(base_directory, headers, date, time)
 
-    # Convert the combined CSV to JSON
-    if not combined_df.empty:
-        convert_csv_to_json(output_csv_file, output_json_file)
+    # Convert each updated CSV to JSON
+    csv_files = glob.glob(os.path.join(base_directory, '*.csv'))
+    for csv_file in csv_files:
+        output_json_file = os.path.join(output_directory, os.path.basename(csv_file).replace('.csv', '.json'))
+        convert_csv_to_json(csv_file, output_json_file)
 
     # 디렉토리 삭제
     try:
