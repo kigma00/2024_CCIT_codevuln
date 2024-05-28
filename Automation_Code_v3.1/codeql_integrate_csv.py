@@ -7,14 +7,13 @@ import pandas as pd
 from datetime import datetime
 import shutil
 
-def add_datetime_and_combine_csv(directory_path, output_file, headers, date, time): 
-    frames = []                      
-    csv_files = glob.glob(os.path.join(directory_path, '*.csv'))                           
-    
-    for file_path in csv_files:                                                                
-        try:                                                                                       
+def add_datetime_to_csv_files(directory_path, headers, date, time):
+    csv_files = glob.glob(os.path.join(directory_path, '*.csv'))
+
+    for file_path in csv_files:
+        try:
             df = pd.read_csv(file_path, header=None)  # CSV 파일 읽기, 파일에 헤더가 없다고 가정
-        
+
             if not df.empty:
                 df.columns = headers  # 헤더 할당
                 # 열을 새 데이터프레임에 추가
@@ -24,11 +23,13 @@ def add_datetime_and_combine_csv(directory_path, output_file, headers, date, tim
                     'time': [time] * len(df)
                 })
                 new_df = pd.concat([new_df, df], axis=1)
-                frames.append(new_df)
+
+                # 변경된 파일을 원래 경로에 저장
+                new_df.to_csv(file_path, index=False)
+                print(f"Updated {file_path} with date and time.")
         except pd.errors.EmptyDataError:
             print(f"Skipping empty or invalid file: {file_path}")
             continue
-
     if frames:
         combined_df = pd.concat(frames, ignore_index=True)
         combined_df.to_csv(output_file, index=False)
