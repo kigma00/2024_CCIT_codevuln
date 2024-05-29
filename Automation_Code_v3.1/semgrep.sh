@@ -4,20 +4,22 @@ clone_directory_name=$2
 DATE=$(date +"%y%m%d")
 TIME=$(date +"%H%M%S")
 
-base_dir="/home/codevuln/scan_result/$DATE"_"$TIME"_"$directory_name"
-clone_path="/home/codevuln/scan_result/$DATE"_"$TIME"_"$directory_name/semgrep.csv"
+base_dir="/home/codevuln/scan_result/${DATE}_${TIME}_${directory_name}"
+clone_path="/home/codevuln/target-repo/$directory_name/$clone_directory_name"
+
+mkdir -p $base_dir
 
 run_semgrep_scan () {
-  local config=$1         
-  local output_prefix=$2 
+  local config=$1
+  local output_prefix=$2
   echo -e "\033[32m[RUN] Semgrep $output_prefix scan\033[0m"
-  cd $base_dir || exit  
-  cp /home/codevuln/semgrep/semgrep_json_csv.py ./  
-  
-  semgrep --config=p/$config $clone_path --json > ./results.json  
+  cd $base_dir || exit
+  cp /home/codevuln/semgrep/semgrep_json_csv.py ./
+
+  semgrep --config=p/$config $clone_path --json > ./results.json
   python3 ./semgrep_json_csv.py
-  mv ./result.csv ./$output_prefix.csv  
-  mv ./results.json ./$output_prefix.json  
+  mv ./result.csv ./${output_prefix}.csv
+  mv ./results.json ./${output_prefix}.json
   rm -f ./semgrep_json_csv.py
 }
 
@@ -38,9 +40,10 @@ for config in "${!scans[@]}"; do
   run_semgrep_scan $config ${scans[$config]}
 done
 
-python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "$base_dir" "$clone_path"
+python3 /home/codevuln/semgrep/semgrep_integrate_csv.py "$base_dir" "$base_dir/semgrep.csv"
 
 cp /home/codevuln/semgrep/semgrep_column_delete.py $base_dir
+cd $base_dir
 python3 semgrep_column_delete.py
 rm -rf ./semgrep_column_delete.py
 
@@ -48,10 +51,7 @@ cp /home/codevuln/semgrep/semgrep_column_order.py $base_dir
 python3 semgrep_column_order.py
 rm -rf ./semgrep_column_order.py
 
-cd /home/codevuln/target-repo/$directory_name/semgrep
-jq -s '[.[][]]' ./default.json ./owasp-top-ten.json ./r2c-security-audit.json ./cwe-top-25.json ./owasp-top-ten.json ./r2c-security-audit.json ./command-injection.json ./insecure-transport.json ./jwt.json ./secrets.json ./sql-injection.json ./xss.json > semgrep.json
-mv semgrep.json ..
-rm -f ./*.json
-mv ../semgrep.json ./
+jq -s '[.[][]]' $base_dir/default.json $base_dir/owasp-top-ten.json $base_dir/r2c-security-audit.json $base_dir/cwe-top-25.json $base_dir/command-injection.json $base_dir/insecure-transport.json $base_dir/jwt.json $base_dir/secrets.json $base_dir/sql-injection.json $base_dir/xss.json > $base_dir/semgrep.json
+rm -f $base_dir/*.json
 
 exit 0
