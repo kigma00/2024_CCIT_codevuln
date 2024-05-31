@@ -52,6 +52,14 @@ python3 semgrep_column_order.py
 rm -rf ./semgrep_column_order.py
 
 jq -s '[.[][]]' $base_dir/default.json $base_dir/owasp-top-ten.json $base_dir/r2c-security-audit.json $base_dir/cwe-top-25.json $base_dir/command-injection.json $base_dir/insecure-transport.json $base_dir/jwt.json $base_dir/secrets.json $base_dir/sql-injection.json $base_dir/xss.json > $base_dir/semgrep.json
-rm -f $base_dir/*.json
+#rm -f $base_dir/*.json
+
+# JSON 파일 삭제 (semgrep.json 제외)
+cd $base_dir
+for file in *.json; do
+  if [ "$file" != "semgrep.json" ]; then
+    rm -f "$file"
+  fi
+done
 
 exit 0
