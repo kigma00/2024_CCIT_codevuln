@@ -26,7 +26,7 @@ git clone --depth=1 "$repository_url" "/home/codevuln/target-repo/$directory_nam
 mkdir "/home/codevuln/target-repo/$directory_name"
 mkdir "/home/codevuln/target-repo/$directory_name/codeql"
 mkdir "/home/codevuln/target-repo/$directory_name/semgrep"
-mdir "/home/codevuln/target-repo/$directory_name/sonarqube"
+mkdir "/home/codevuln/target-repo/$directory_name/sonarqube"
 #scan_result
 mkdir "/home/codevuln/scan_result"
 
