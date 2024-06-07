@@ -2,8 +2,8 @@
 
 directory_name=$1
 clone_directory_name=$2
-DATE=$4
-TIME=$3
+DATE=$3
+TIME=$4
 
 # 토큰 파일에서 토큰 값을 읽어옴
 token=$(tail -n 1 token.txt)
