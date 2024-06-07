@@ -3,8 +3,8 @@
 directory_name=$1
 clone_directory_name=$2
 language=$3
-DATE=$(date +"%y%m%d")
-TIME=$(date +"%H%M%S")
+DATE=$4
+TIME=$5
 
 echo -e "\033[32m[+] Create database\033[0m $@"
 sleep 2
