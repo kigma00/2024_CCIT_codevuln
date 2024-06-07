@@ -11,9 +11,6 @@ echo "   \\ \\_______\\ \\_______\\ \\_______\\ \\_______\\ \\__/ /     \\ \\___
 echo "    \\|_______|\\|_______|\\|_______|\\|_______|\\|__|/       \\|_______|\\|_______|\\|__| \\|__|"
 echo""
 
-DATE=$(date +"%y%m%d")
-TIME=$(date +"%H%M%S")
-
 
 # query setting
 echo -e "\033[32m[+] Git clone\033[0m $@"
@@ -25,6 +22,9 @@ mkdir -p /home/codevuln/target-repo/$directory_name/$clone_directory_name
 
 echo -e "\033[32m[+] git clone : /home/codevuln/target-repo/$directory_name/$clone_directory_name\033[0m $@"
 git clone --depth=1 "$repository_url" "/home/codevuln/target-repo/$directory_name/$clone_directory_name"
+
+DATE=$(date +"%y%m%d")
+TIME=$(date +"%H%M%S")
 
 mkdir "/home/codevuln/target-repo/$directory_name"
 mkdir "/home/codevuln/target-repo/$directory_name/codeql"
