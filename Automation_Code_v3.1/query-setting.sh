@@ -75,4 +75,14 @@ sonar = SonarQubeClient(sonarqube_url=url, username=username, password=password)
 END
 
 python3 /home/codevuln/sonarqube/sonarqube-query-action.py $directory_name $clone_directory_name &
-./codeql.sh $directory_name $clone_directory_name $language & ./semgrep.sh $directory_name $clone_directory_name &
+./codeql.sh $directory_name $clone_directory_name $language & 
+./semgrep.sh $directory_name $clone_directory_name &
+
+# wait for the previous scripts to finish
+wait
+
+echo -e "\033[32m[+] All analysis completed\033[0m $@"
+
+# csv 결과물 통합
+#python3 /home/codevuln/conbine_csv.py
+
