@@ -1,8 +1,8 @@
 #!/bin/bash
 directory_name=$1
 clone_directory_name=$2
-DATE=$4
-TIME=$3
+DATE=$3
+TIME=$4
 
 base_dir="/home/codevuln/scan_result/${DATE}_${TIME}_${directory_name}"
 clone_path="/home/codevuln/target-repo/$directory_name/$clone_directory_name"
