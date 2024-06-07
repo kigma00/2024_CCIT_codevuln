@@ -65,10 +65,12 @@ esac
 python3 <<END
 from sonarqube import SonarQubeClient
 
+# SonarQube 서버 설정
 url = "http://localhost:9000"
 username = "admin"
 password = "admin"
 
+# SonarQube 클라이언트 초기화
 sonar = SonarQubeClient(sonarqube_url=url, username=username, password=password)
 END
 
