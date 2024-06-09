@@ -68,6 +68,7 @@ codevuln_setting() {
     mkdir /home/codevuln/sonarqube/
     mkdir /home/codevuln/target-repo/
 
+    chmod +x ./conbine_csv.py && mv ./conbine_csv.py ./conbine.py /home/codevuln/
     chmod +x ./codeql_integrate_csv.py && mv ./codeql_integrate_csv.py /home/codevuln/codeql/
     chmod +x ./semgrep_integrate_csv.py && mv ./semgrep_integrate_csv.py /home/codevuln/semgrep/
     chmod +x ./semgrep_json_csv.py && mv ./semgrep_json_csv.py /home/codevuln/semgrep
