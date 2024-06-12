@@ -2,41 +2,37 @@ import os
 import sys
 import csv
 import json
-import glob
 import pandas as pd
 from datetime import datetime
-import shutil
 
-def add_datetime_to_csv_files(directory_path, headers, date, time):
-    csv_files = glob.glob(os.path.join(directory_path, 'codeql.csv'))
+def add_datetime_to_csv_file(file_path, headers, date, time):
+    try:
+        # CSV 파일 읽기, 파일에 헤더가 없다고 가정
+        df = pd.read_csv(file_path, header=None)
 
-    for file_path in csv_files:
-        try:
-            df = pd.read_csv(file_path, header=None)  # CSV 파일 읽기, 파일에 헤더가 없다고 가정
+        if not df.empty:
+            # 데이터프레임의 열 이름을 지정한 헤더로 설정
+            df.columns = headers
 
-            if not df.empty:
-                df.columns = headers  # 헤더 할당
-                # 열을 새 데이터프레임에 추가
-                new_df = pd.DataFrame({
-                    'tool': ['CodeQL'] * len(df),
-                    'date': [date] * len(df),
-                    'time': [time] * len(df)
-                })
-                new_df = pd.concat([new_df, df], axis=1)
+            # 새로운 데이터프레임을 생성하여 tool, date, time 열을 추가
+            new_df = pd.DataFrame({
+                'tool': ['CodeQL'] * len(df),
+                'date': [date] * len(df),
+                'time': [time] * len(df)
+            })
 
-                # 변경된 파일을 원래 경로에 저장
-                new_df.to_csv(file_path, index=False)
-                print(f"Updated {file_path} with date and time.")
-        except pd.errors.EmptyDataError:
-            print(f"Skipping empty or invalid file: {file_path}")
-            continue
-    if frames:
-        combined_df = pd.concat(frames, ignore_index=True)
-        combined_df.to_csv(output_file, index=False)
-        print(f"All files integrated into {output_file}")
-        return combined_df
-    else:
-        print("No non-empty CSV files found to combine.")
+            # 원래 데이터프레임과 새 데이터프레임을 결합
+            new_df = pd.concat([new_df, df], axis=1)
+
+            # 변경된 내용을 원래 경로에 저장
+            new_df.to_csv(file_path, index=False)
+            print(f"Updated {file_path} with date and time.")
+            return new_df
+        else:
+            print(f"The file {file_path} is empty.")
+            return pd.DataFrame()
+    except pd.errors.EmptyDataError:
+        print(f"Skipping empty or invalid file: {file_path}")
         return pd.DataFrame()
 
 def convert_csv_to_json(csv_file_path, json_file_path):
@@ -44,14 +40,14 @@ def convert_csv_to_json(csv_file_path, json_file_path):
     with open(csv_file_path, 'r') as csv_file:
         # CSV 파일을 읽어오는데, 첫 번째 행은 헤더로 사용
         reader = csv.DictReader(csv_file)
-        
+
         # 각 행을 JSON 형식으로 변환하여 저장할 배열 초기화
         json_data = []
-        
+
         # CSV 파일의 각 행에 대해 반복하여 JSON 객체로 변환
         for row in reader:
             json_data.append(row)
-        
+
         # JSON 파일에 데이터 저장
         with open(json_file_path, 'w') as json_file:
             # JSON 배열 형식으로 저장
@@ -71,17 +67,22 @@ if __name__ == "__main__":
     output_directory = f"/home/codevuln/scan_result/{date}_{time}_{directory_name}"
     os.makedirs(output_directory, exist_ok=True)  # output 디렉토리를 생성
 
-    # Define headers to add to each CSV file
+    # CSV 파일 경로 설정
+    csv_file_path = os.path.join(base_directory, 'codeql.csv')
+    if not os.path.isfile(csv_file_path):
+        print(f"CSV file not found: {csv_file_path}")
+        sys.exit(1)
+
+    # Define headers to add to the CSV file
     headers = ['name', 'explanation', 'severity', 'message', 'path', 'start_line', 'start_col', 'end_line', 'end_col']
 
-    # Process CSV files by adding date/time
-    add_datetime_to_csv_files(base_directory, headers, date, time)
+    # Process the CSV file by adding date/time
+    updated_df = add_datetime_to_csv_file(csv_file_path, headers, date, time)
 
-    # Convert each updated CSV to JSON
-    csv_files = glob.glob(os.path.join(base_directory, 'codeql.csv'))
-    for csv_file in csv_files:
-        output_json_file = os.path.join(output_directory, os.path.basename(csv_file).replace('.csv', '.json'))
-        convert_csv_to_json(csv_file, output_json_file)
+    # Convert the updated CSV to JSON if the file is not empty
+    if not updated_df.empty:
+        output_json_file = os.path.join(output_directory, 'codeql.json')
+        convert_csv_to_json(csv_file_path, output_json_file)
 
     # 디렉토리 삭제
     #try:
