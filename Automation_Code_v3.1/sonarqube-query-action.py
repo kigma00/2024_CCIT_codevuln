@@ -73,6 +73,6 @@ while not create_project():
     time.sleep(3)  # 5초 대기 후 재시도
 
 # 성공한 후에는 sonarqube.sh 스크립트 실행
-command = f"./sonarqube.sh {directory_name} {clone_directory_name} {date} {time}"
+command = f"./sonarqube.sh {directory_name} {clone_directory_name} {DATE} {TIME}"
 process = subprocess.Popen(command, shell=True)
 process.wait()
