@@ -60,8 +60,8 @@ def create_project():
 if len(sys.argv) > 2:  # 적어도 세 개의 명령줄 인수가 전달되었는지 확인
     directory_name = sys.argv[1]
     clone_directory_name = sys.argv[2]
-    DATE = sys.argv[3]
-    TIME = sys.argv[4]
+    date = sys.argv[3]
+    time = sys.argv[4]
     print("Received directory_name:", directory_name)
     print("Received clone_directory_name:", clone_directory_name)
 else:
@@ -73,6 +73,6 @@ while not create_project():
     time.sleep(3)  # 5초 대기 후 재시도
 
 # 성공한 후에는 sonarqube.sh 스크립트 실행
-command = f"./sonarqube.sh {directory_name} {clone_directory_name} {DATE} {TIME}"
+command = f"./sonarqube.sh {directory_name} {clone_directory_name} {date} {time}"
 process = subprocess.Popen(command, shell=True)
 process.wait()
