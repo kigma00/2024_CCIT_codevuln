@@ -75,7 +75,7 @@ password = "admin"
 sonar = SonarQubeClient(sonarqube_url=url, username=username, password=password)
 END
 
-python3 /home/codevuln/sonarqube/sonarqube-query-action.py $directory_name $clone_directory_name $DATE $TIME &
+python3 ./sonarqube-query-action.py $directory_name $clone_directory_name $DATE $TIME &
 ./codeql.sh $directory_name $clone_directory_name $language $DATE $TIME & 
 ./semgrep.sh $directory_name $clone_directory_name $DATE $TIME &
 
