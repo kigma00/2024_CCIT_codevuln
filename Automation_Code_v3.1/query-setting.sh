@@ -82,6 +82,6 @@ python3 /home/codevuln/sonarqube/sonarqube-query-action.py $directory_name $clon
 # wait for the previous scripts to finish
 wait
 # csv 결과물 통합
-python3 /home/codevuln/conbine_csv.py $directory_name $clone_directory_name $DATE $TIME
+#python3 /home/codevuln/conbine_csv.py $directory_name $clone_directory_name $DATE $TIME
 echo -e "\033[32m[+] combine_csv.py script execution completed\033[0m $@"
 echo -e "\033[32m[+] All analysis completed\033[0m $@"
