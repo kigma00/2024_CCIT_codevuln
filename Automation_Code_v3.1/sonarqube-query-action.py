@@ -60,8 +60,8 @@ def create_project():
 if len(sys.argv) > 2:  # 적어도 세 개의 명령줄 인수가 전달되었는지 확인
     directory_name = sys.argv[1]
     clone_directory_name = sys.argv[2]
-    date = sys.argv[3]
-    time = sys.argv[4]
+    DATE = sys.argv[3]
+    TIME = sys.argv[4]
     print("Received directory_name:", directory_name)
     print("Received clone_directory_name:", clone_directory_name)
 else:
