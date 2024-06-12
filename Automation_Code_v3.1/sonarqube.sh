@@ -23,6 +23,8 @@ echo "Waiting for SonarQube to process the results..."
 sleep 180  # 3분 대기
 
 export directory_name
+export DATE
+export TIME
 echo "Checking project key: $directory_name"
 
 # 특정 프로젝트의 이슈들 검색 및 CSV 및 JSON 파일 경로 설정
@@ -35,6 +37,8 @@ from datetime import datetime
 from sonarqube import SonarQubeClient
 
 directory_name = os.getenv('directory_name')
+DATE = os.getenv('DATE')
+TIME = os.getenv('TIME')
 print("Start checking SonarQube issues...")
 print("Project key:", directory_name)
 
@@ -48,6 +52,7 @@ time.sleep(10)  # 추가 대기 시간
 try:
     issues_result = sonar.issues.search_issues(componentKeys=directory_name)
     print("API Call Successful.")
+    print("Issues result:", issues_result)  # API 응답 출력
 
     if issues_result['total'] > 0:
         issues = issues_result['issues']  # 받아온 이슈들을 변수에 할당
@@ -58,11 +63,15 @@ try:
         # 이슈를 severity에 따라 정렬
         issues.sort(key=lambda x: severity_order.index(x.get('severity')))
 
+        # 출력 디렉토리 생성
+        output_directory = f"/home/codevuln/scan_result/{DATE}_{TIME}_{directory_name}"
+        os.makedirs(output_directory, exist_ok=True)  # 디렉토리 생성
+
         # CSV 파일 경로 및 이름 설정
-        csv_file_path = f"/home/codevuln/scan_result/{DATE}_{TIME}_{directory_name}/sonarqube.csv"
+        csv_file_path = os.path.join(output_directory, "sonarqube.csv")
 
         # JSON 파일 경로 및 이름 설정
-        json_file_path = f"/home/codevuln/scan_result/{DATE}_{TIME}_{directory_name}/sonarqube.json"
+        json_file_path = os.path.join(output_directory, "sonarqube.json")
 
         # 현재 시간과 날짜를 가져오기
         current_datetime = datetime.now()
@@ -109,6 +118,8 @@ try:
 
                 # JSON 파일에 데이터 쓰기
                 json.dump(json_data, json_file, indent=4)
+
+        print(f"Results saved to CSV: {csv_file_path} and JSON: {json_file_path}")
 
     else:
         print("No issues found. Check project key and SonarQube server status.")
