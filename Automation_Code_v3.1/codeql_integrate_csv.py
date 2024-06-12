@@ -34,24 +34,34 @@ def add_datetime_to_csv_file(file_path, headers, date, time):
     except pd.errors.EmptyDataError:
         print(f"Skipping empty or invalid file: {file_path}")
         return pd.DataFrame()
+    except ValueError as ve:
+        print(f"Error processing file {file_path}: {ve}")
+        return pd.DataFrame()
 
 def convert_csv_to_json(csv_file_path, json_file_path):
-    # CSV 파일 열기
-    with open(csv_file_path, 'r') as csv_file:
-        # CSV 파일을 읽어오는데, 첫 번째 행은 헤더로 사용
-        reader = csv.DictReader(csv_file)
+    try:
+        # CSV 파일 열기
+        with open(csv_file_path, 'r', encoding='utf-8') as csv_file:
+            # CSV 파일을 읽어오는데, 첫 번째 행은 헤더로 사용
+            reader = csv.DictReader(csv_file)
 
-        # 각 행을 JSON 형식으로 변환하여 저장할 배열 초기화
-        json_data = []
+            # 각 행을 JSON 형식으로 변환하여 저장할 배열 초기화
+            json_data = []
 
-        # CSV 파일의 각 행에 대해 반복하여 JSON 객체로 변환
-        for row in reader:
-            json_data.append(row)
+            # CSV 파일의 각 행에 대해 반복하여 JSON 객체로 변환
+            for row in reader:
+                json_data.append(row)
 
-        # JSON 파일에 데이터 저장
-        with open(json_file_path, 'w') as json_file:
-            # JSON 배열 형식으로 저장
-            json.dump(json_data, json_file, indent=4)
+            # JSON 파일에 데이터 저장
+            with open(json_file_path, 'w', encoding='utf-8') as json_file:
+                # JSON 배열 형식으로 저장
+                json.dump(json_data, json_file, indent=4)
+                
+            print(f"Converted {csv_file_path} to {json_file_path}")
+    except FileNotFoundError as fnf_error:
+        print(f"File not found: {fnf_error}")
+    except Exception as e:
+        print(f"Error converting file {csv_file_path} to JSON: {e}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 5:
@@ -84,8 +94,8 @@ if __name__ == "__main__":
         output_json_file = os.path.join(output_directory, 'codeql.json')
         convert_csv_to_json(csv_file_path, output_json_file)
 
-    # 디렉토리 삭제
-    #try:
-    #    shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
-    #except Exception as e:
-    #    print(f"Error removing directory: {e}")
+    # 디렉토리 삭제 (주석 처리된 부분, 필요 시 사용)
+    # try:
+    #     shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
+    # except Exception as e:
+    #     print(f"Error removing directory: {e}")
