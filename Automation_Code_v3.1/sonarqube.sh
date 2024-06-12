@@ -13,6 +13,7 @@ rm -r ./token.txt
 /home/codevuln/sonarqube/sonarscanner/bin/sonar-scanner -X \
     -Dsonar.projectKey="$directory_name" \
     -Dsonar.sources="/home/codevuln/target-repo/$directory_name/$clone_directory_name" \
+    -Dsonar.projectBaseDir="/home/codevuln/target-repo/$directory_name/$clone_directory_name" \
     -Dsonar.java.binaries=/home/codevuln/sonarqube/sonarscanner/jre/bin \
     -Dsonar.host.url="http://localhost:9000" \
     -Dsonar.login="$token"
