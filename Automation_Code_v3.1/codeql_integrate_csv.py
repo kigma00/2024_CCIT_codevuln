@@ -8,7 +8,7 @@ from datetime import datetime
 import shutil
 
 def add_datetime_to_csv_files(directory_path, headers, date, time):
-    csv_files = glob.glob(os.path.join(directory_path, '*.csv'))
+    csv_files = glob.glob(os.path.join(directory_path, 'codeql.csv'))
 
     for file_path in csv_files:
         try:
@@ -78,13 +78,13 @@ if __name__ == "__main__":
     add_datetime_to_csv_files(base_directory, headers, date, time)
 
     # Convert each updated CSV to JSON
-    csv_files = glob.glob(os.path.join(base_directory, '*.csv'))
+    csv_files = glob.glob(os.path.join(base_directory, 'codeql.csv'))
     for csv_file in csv_files:
         output_json_file = os.path.join(output_directory, os.path.basename(csv_file).replace('.csv', '.json'))
         convert_csv_to_json(csv_file, output_json_file)
 
     # 디렉토리 삭제
-    try:
-        shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
-    except Exception as e:
-        print(f"Error removing directory: {e}")
+    #try:
+    #    shutil.rmtree(f"/home/codevuln/target-repo/{directory_name}/codeql")
+    #except Exception as e:
+    #    print(f"Error removing directory: {e}")
