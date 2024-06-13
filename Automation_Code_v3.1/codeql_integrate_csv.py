@@ -5,6 +5,9 @@ import json
 import pandas as pd
 from datetime import datetime
 
+# CSV 필드 크기 제한 늘리기
+csv.field_size_limit(10000000)
+
 def add_datetime_to_csv_file(file_path, headers, date, time):
     try:
         # CSV 파일 읽기, 파일에 헤더가 없다고 가정
