@@ -1,8 +1,12 @@
 import os
 import sys
 import pandas as pd
+import csv
 
 def integrate_csv_files(file_paths, output_file, defined_headers):
+    # CSV 필드 크기 제한을 늘립니다.
+    csv.field_size_limit(10000000)
+    
     frames = []  # 데이터프레임을 저장할 리스트 초기화
 
     for file_path in file_paths:
