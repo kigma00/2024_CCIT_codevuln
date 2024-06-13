@@ -36,6 +36,9 @@ import os
 from datetime import datetime
 from sonarqube import SonarQubeClient
 
+# CSV 모듈 필드 크기 제한 늘리기
+csv.field_size_limit(10000000)
+
 directory_name = os.getenv('directory_name')
 DATE = os.getenv('DATE')
 TIME = os.getenv('TIME')
