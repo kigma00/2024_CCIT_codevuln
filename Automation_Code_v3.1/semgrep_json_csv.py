@@ -1,6 +1,9 @@
 import json
 import csv
 
+# CSV 모듈의 필드 크기 제한을 늘립니다.
+csv.field_size_limit(10000000)
+
 with open('results.json', 'r') as f:
     data = json.load(f)
 
