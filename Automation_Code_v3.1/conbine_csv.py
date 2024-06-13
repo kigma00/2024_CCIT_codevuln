@@ -1,3 +1,5 @@
+import os
+import sys
 import pandas as pd
 
 def integrate_csv_files(file_paths, output_file, defined_headers):
@@ -20,11 +22,23 @@ def integrate_csv_files(file_paths, output_file, defined_headers):
         print("No CSV files found or all files are empty.")
 
 if __name__ == "__main__":
-    # 개별 CSV 파일 경로 리스트 정의
+    if len(sys.argv) < 5:
+        print("Usage: python combine_csv.py <directory_name> <clone_directory_name> <date> <time>")
+        sys.exit(1)
+
+    directory_name = sys.argv[1]
+    clone_directory_name = sys.argv[2]
+    date = sys.argv[3]
+    time = sys.argv[4]
+
+    # 기본 디렉토리 설정
+    base_directory = f"/home/codevuln/scan_result/{date}_{time}_{directory_name}"
+    
+    # CSV 파일 경로 리스트 정의
     file_paths = [
-        "/home/codevuln/target-repo/gnuboard5/scan_result/codeql.csv",
-        "/home/codevuln/target-repo/gnuboard5/scan_result/semgrep.csv",
-        #"/home/codevuln/target-repo/gnuboard5/scan_result/sonarqube.csv"
+        os.path.join(base_directory, "codeql.csv"),
+        os.path.join(base_directory, "semgrep.csv"),
+        os.path.join(base_directory, "sonarqube.csv")
     ]
 
     # 새로운 헤더 15개 정의
@@ -35,5 +49,5 @@ if __name__ == "__main__":
     ]
 
     # 함수 호출
-    output_csv = "test_result.csv"
+    output_csv = os.path.join(base_directory, "integrated_result.csv")
     integrate_csv_files(file_paths, output_csv, headers)
