@@ -34,10 +34,18 @@ def integrate_csv_files(directory_path, output_file):
 
 def cleanup_files(directory_path):
     try:
-        delete_command = f"mv {directory_path}/semgrep.csv /home/codevuln/ && rm -rf {directory_path}/*.csv && mv /home/codevuln/semgrep.csv {directory_path}"
-        subprocess.run(delete_command, shell=True, check=True, cwd=directory_path)
-    except subprocess.CalledProcessError as e:
-        print(f"Error cleaning up files: {e}")
+        # 제외할 파일 리스트
+        exclude_files = ["codeql.csv", "semgrep.csv", "sonarqube.csv"]
+        
+        for file in os.listdir(directory_path):
+            if file.endswith('.csv') and file not in exclude_files:
+                file_path = os.path.join(directory_path, file)
+                os.remove(file_path)  # 파일 삭제
+                print(f"Deleted file: {file_path}")
+
+    except Exception as e:  # 명령 실행 중 오류 발생 시 처리
+        print(f"Error cleaning up files: {e}")  # 오류 메시지 출력
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
