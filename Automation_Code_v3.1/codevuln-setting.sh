@@ -153,6 +153,7 @@ sleep 2
 codevuln_setting
 sleep 2
 
+'''
 target_directory="/home/codevuln"
 files=("codevuln-setting.sh" "query-setting.sh" "codeql.sh" "semgrep.sh" "sonarqube.sh")
 
@@ -160,3 +161,4 @@ for file in "${files[@]}"; do
     cp "$current_directory/$file" "$target_directory"
     echo "$file moved to $target_directory"
 done
+'''
