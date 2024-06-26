@@ -15,16 +15,21 @@ echo""
 # query setting
 echo -e "\033[32m[+] Git clone\033[0m $@"
 read -p "Enter git clone address : " repository_url
-directory_name=$(basename "$repository_url")
-clone_directory_name="$directory_name"-repo
+
+DATE=$(date +"%Y%m%d")
+TIME=$(date +"%H%M%S")
+datetime="${DATE}-${TIME}"
+
+# Prefix directory_name with datetime
+directory_name="${datetime}_$(basename "$repository_url")"
+
+# Use the datetime-prefixed directory_name for the clone directory name
+clone_directory_name="${directory_name}-repo"
 
 mkdir -p /home/codevuln/target-repo/$directory_name/$clone_directory_name
 
 echo -e "\033[32m[+] git clone : /home/codevuln/target-repo/$directory_name/$clone_directory_name\033[0m $@"
 git clone --depth=1 "$repository_url" "/home/codevuln/target-repo/$directory_name/$clone_directory_name"
-
-DATE=$(date +"%y%m%d")
-TIME=$(date +"%H%M%S")
 
 mkdir "/home/codevuln/target-repo/$directory_name"
 mkdir "/home/codevuln/target-repo/$directory_name/codeql"
@@ -76,12 +81,12 @@ sonar = SonarQubeClient(sonarqube_url=url, username=username, password=password)
 END
 
 python3 ./sonarqube-query-action.py $directory_name $clone_directory_name $DATE $TIME &
-./codeql.sh $directory_name $clone_directory_name $language $DATE $TIME & 
+./codeql.sh $directory_name $clone_directory_name $language $DATE $TIME &
 ./semgrep.sh $directory_name $clone_directory_name $DATE $TIME &
 
 # wait for the previous scripts to finish
 wait
 # csv 결과물 통합
-python3 /home/codevuln/conbine_csv.py $directory_name $clone_directory_name $DATE $TIME 
+python3 /home/codevuln/conbine_csv.py $directory_name $clone_directory_name $DATE $TIME
 echo -e "\033[32m[+] combine_csv.py script execution completed\033[0m $@"
 echo -e "\033[32m[+] All analysis completed\033[0m $@"
